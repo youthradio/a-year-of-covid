@@ -1,0 +1,10 @@
+{
+  "vetur.format.defaultFormatter.html": "prettier",
+  "vetur.validation.template": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false
+}

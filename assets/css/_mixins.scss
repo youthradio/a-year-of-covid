@@ -1,0 +1,6 @@
+@function MAX($numbers...){
+    @return m#{a}x(#{$numbers});
+  }
+  @function MIN($numbers...){
+    @return m#{i}n(#{$numbers});
+  }  
