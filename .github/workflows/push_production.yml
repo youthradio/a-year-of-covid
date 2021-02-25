@@ -34,7 +34,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - name: Rebuild for Production
         env:
-          BASE_URL_PRODUCTION: opinion-soundtrack-for-trump-free-white-house
+          BASE_URL_PRODUCTION: a-year-of-covid-school-on-screens
         run: yarn publish-ghpages
 
       - name: Deploy Production
