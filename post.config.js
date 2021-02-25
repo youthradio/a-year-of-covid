@@ -1,19 +1,26 @@
-const BASEURL = process.env.BASE_URL_PRODUCTION || '2021-inauguration-yri'
-const CAN_URL = process.env.BASE_URL_PRODUCTION
-  ? `https://interactive.yr.media/${BASEURL}`
-  : `https://youthradio.github.io/${BASEURL}`
+import ArticleData from './data/data.json'
 
-module.exports = {
-  baseURL: `/${BASEURL}`,
-  title: `Opinion - A Soundtrack for the Trump-Free White House`,
-  author: 'YR Arts & Interactive Team',
-  publishDate: 'Jan. 19, 2021',
-  location: 'Oakland, CA',
-  description:
-    'Every big life event needs a playlist, and the Biden-Harris inauguration — and first 100 days — are no exception. We asked people celebrating the new administration to co-produce a music line-up for this next phase in American politics. Vote here!',
+const BASEURL =
+  process.env.BASE_URL_PRODUCTION === ''
+    ? process.env.BASE_URL_PRODUCTION
+    : '/a-year-of-covid'
+const CAN_URL =
+  process.env.BASE_URL_PRODUCTION === ''
+    ? `https://interactive.yr.media`
+    : `https://youthradio.github.io${BASEURL}`
+
+const POSTCONFIG = {
+  baseURL: BASEURL,
+  title: ArticleData.headline,
+  author: ArticleData.author,
+
+  publishDate: ArticleData.date,
+  location: ArticleData.location,
+  description: ArticleData.seo_description || '',
   tweetMessage: '@itsyrmedia',
   url: CAN_URL,
   featureImage: `${CAN_URL}/yriHEADWERrectangle_social.jpg`,
+
   featureImagePath: 'images/template-feature-image',
   featureImageDescription: 'People Protesting BLM',
   featureImageCaption: '(Photo: Andersen Ross Photography Inc/Getty Images)',
@@ -25,11 +32,13 @@ module.exports = {
   twitterHandler: '@itsyrmedia',
   docs: [
     {
-      name: '2021-inauguration-yri - backend',
-      id: '1na5DSfBATVAgtImO5mcoZdTtHfD-IDrdq9MePFKCXM8',
+      name: 'covid- one year - backend',
+      id: '1nQVa4umMalob3kwRFljX075jIn-sw4NRt9JRaEjcl-8',
     },
   ],
-  dataPath: 'data/data.json',
+  dataPath: '../data/data.json',
   POLLSERVER: 'https://ee51aej7u4.execute-api.us-west-2.amazonaws.com/latest',
   POLLID: 'af897078-393e-4d86-bcab-ab079abfda21',
 }
+
+export default POSTCONFIG

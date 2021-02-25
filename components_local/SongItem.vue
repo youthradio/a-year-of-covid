@@ -53,7 +53,7 @@
 <script>
 import PlayPauseIcon from './PlayPauseIcon'
 import HeartIcon from './HeartIcon'
-import { POLLSERVER, POLLID } from '~/post.config'
+import POSTCONFIG from '~/post.config.js'
 
 export default {
   components: {
@@ -99,7 +99,7 @@ export default {
       this.likesLoading = true
 
       const res = await fetch(
-        `${POLLSERVER}/vote_poll/${POLLID}/${this.song.like_id}`,
+        `${POSTCONFIG.POLLSERVER}/vote_poll/${POSTCONFIG.POLLID}/${this.song.like_id}`,
         {
           method: 'GET',
           credentials: 'include',

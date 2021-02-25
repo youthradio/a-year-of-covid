@@ -5,39 +5,32 @@
     <div ref="container" class="h-100 w-100 m-menu">
       <!-- Additional required wrapper -->
       <!-- Slides -->
-      <div class="relative ph3 center">
-        <div class="z--1 op o-70 nl3 nr3">
-          <img
-            srcset="
-              yriHEADWERrectangle_small.jpg    600w,
-              yriHEADWERrectangle_feature.jpg 1400w
-            "
-            sizes="(max-width: 600px) 600w,
-            1400w"
-            loading="lazy"
-            width="1400"
-            height="875"
-            class="db fit-cover max-dim"
-            src="yriHEADWERrectangle_feature.jpg"
-          />
-        </div>
-        <article
-          class="measure-wide relative center absolute-ns bottom-0 left-0 right-0"
-        >
-          <h3 class="roboto-mono fw3 f3-ns f4 lh-title mb1">OPINION</h3>
-
+      <header
+        class="relative ph3 center min-vh-100 flex flex-column justify-center"
+      >
+        <article class="measure-wide relative center tc">
           <h1 class="day-sans f1-ns f3 lh-title mt">
-            A Soundtrack for the <span class="nowrap">Trump-Free</span> White
-            House
+            {{ articleData.headline }}
           </h1>
           <h3 class="roboto-mono fw3 f3-ns f4 lh-title">
-            New Administration, New Playlist
+            {{ articleData.subheadline }}
           </h3>
-          <h4 class="assistant normal">By YR Arts & Interactive Team</h4>
-          <h4 class="assistant normal">01.19.21</h4>
+          <h4 class="assistant normal">{{ articleData.date }}</h4>
+          <a
+            class="f6 pointer dib grow no-underline br2 ph3 pv2 mb2 white bg-blue tc"
+            @click.prevent="
+              $refs.startMeeting.scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            Start Meeting
+          </a>
+
+          <p class="gray">
+            {{ articleData.disclaimer }}
+          </p>
         </article>
-      </div>
-      <article class="ph3 justify-center pv3">
+      </header>
+      <article ref="startMeeting" class="ph3 justify-center pv3">
         <div
           class="measure-wide lh-copy center"
           v-html="articleData.intro.text"
@@ -47,12 +40,26 @@
       <article class="mw7 ph3 relative center">
         <div class="f7 o-40 tc" v-html="articleData.terms.text" />
 
-        <div v-for="song in songs" :key="song.song_name">
-          <SongItem
-            :song="song"
-            :is-playing="playerId === song.id"
-            @play-song="playSong"
-          />
+        <div v-for="participant in participants" :key="participant.name">
+          {{ participant }}
+
+          <video
+            class="db w-100"
+            controls="false"
+            loop
+            autoplay
+            controlsList="nodownload nofullscreen noremoteplayback"
+            playsinline
+            muted
+            disablePictureInPicture
+          >
+            <source
+              v-for="video in participant.videos"
+              :key="video.url"
+              :src="video.url"
+              :type="`video/${video.type}`"
+            />
+          </video>
         </div>
       </article>
       <article class="ph3 pv3">
@@ -83,34 +90,24 @@
 
 <script>
 import CommonUtils from '../mixins/CommonUtils'
-import POSTCONFIG from '../post.config'
+import POSTCONFIG from '~/post.config'
 import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/Custom/ShareContainer'
-import SongItem from '~/components_local/SongItem'
-
 import ArticleData from '~/data/data.json'
-import Tracks from '~/data/tracks.json'
 
 export default {
   components: {
     MenuHeader,
     ShareContainer,
-    SongItem,
   },
   mixins: [CommonUtils],
   asyncData(ctx) {
-    const content = ArticleData.content[0]
-    const tracks = Object.fromEntries(Tracks)
-    const articleData = Object.assign({}, content, {
-      songs: content.songs.map((song) =>
-        Object.assign({}, song, { track: tracks[song.id] })
-      ),
-    })
+    const articleData = ArticleData.content[0]
 
     return {
       postData: POSTCONFIG,
       articleData,
-      songs: articleData.songs,
+      participants: articleData.participants,
     }
   },
   data() {

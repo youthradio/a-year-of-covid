@@ -102,7 +102,16 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    {
+      src: '~plugins/scroll-smooth.js',
+      ssr: false,
+    },
+    {
+      src: '~plugins/lazysizes.js',
+      ssr: false,
+    },
+  ],
   /*
    ** Nuxt.js dev-modules
    */

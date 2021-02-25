@@ -5,6 +5,9 @@ export default {
     }
   },
   computed: {
+    isSafari() {
+      return /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+    },
     isLoading() {
       return this.$store.state.isLoading
     },

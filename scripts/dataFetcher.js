@@ -1,13 +1,14 @@
 // import { csvParse } from 'd3-dsv'
 // import { group } from 'd3-array'
 // import fetch from 'node-fetch'
-const Gootenberg = require('gootenberg')
-const marked = require('marked')
-const createDOMPurify = require('dompurify')
-const { JSDOM } = require('jsdom')
-const { makeSlug } = require('./utils.js')
-const credentials = require('./credentials.json')
+import Gootenberg from 'gootenberg'
+import marked from 'marked'
+import createDOMPurify from 'dompurify'
+import { JSDOM } from 'jsdom'
+import utils from './utils.js'
+import credentials from './credentials.json'
 
+const makeSlug = utils.makeSlug
 const DOMPurify = createDOMPurify(new JSDOM('').window)
 
 marked.setOptions({
@@ -102,4 +103,4 @@ async function customFetcher(DOC_ID) {
   console.log(convertedData)
   return convertedData
 }
-module.exports = customFetcher
+export default customFetcher
