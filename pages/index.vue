@@ -1,5 +1,5 @@
 <template>
-  <div class="vh-100-ns flex flex-column assistant relative">
+  <div class="flex flex-column assistant relative">
     <MenuHeader class="z-10" :menu-fixed="true" />
     <!-- Slider div container -->
     <div ref="container" class="h-100 w-100 m-menu">
@@ -31,27 +31,27 @@
           </p>
         </article>
       </header>
-      <article ref="startMeeting" class="ph3 justify-center pv3">
+      <div
+        ref="startMeeting"
+        class="min-vh-100 bg-dark-gray flex items-center justify-center"
+      >
         <div
-          class="measure-wide lh-copy center"
-          v-html="articleData.intro.text"
-        ></div>
-      </article>
-
-      <article class="mw7 ph3 relative center">
-        <div class="f7 o-40 tc" v-html="articleData.terms.text" />
-      </article>
-      <div class="mw9 center flex flex-wrap justify-center align-stretch">
-        <div
-          v-for="participant in participants"
-          :key="participant.name"
-          class="mw6 w-50 w-100-ns"
+          class="mw9 center h-100 flex flex-wrap justify-center align-stretch"
         >
-          <video-player
-            :participant="participant"
-            :unmuted="unmutedId === participant.id"
-            @on-unmuted="(id) => (unmutedId = id)"
-          />
+          <div
+            v-for="participant in participants"
+            :key="participant.name"
+            class="mw5 w-50 w-100-ns"
+          >
+            <video-player
+              :participant="participant"
+              :unmuted="unmutedId === participant.id"
+              @on-unmuted="(id) => (unmutedId = id)"
+            />
+          </div>
+        </div>
+        <div class="w-100 measure-narrow ml3 self-stretch bg-white">
+          <h3 class="tc">Chat</h3>
         </div>
       </div>
       <article class="ph3 pv3">
