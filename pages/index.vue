@@ -40,15 +40,20 @@
 
       <article class="mw7 ph3 relative center">
         <div class="f7 o-40 tc" v-html="articleData.terms.text" />
-
-        <div v-for="participant in participants" :key="participant.name">
+      </article>
+      <div class="mw9 center flex flex-wrap justify-center align-stretch">
+        <div
+          v-for="participant in participants"
+          :key="participant.name"
+          class="mw6 w-50 w-100-ns"
+        >
           <video-player
             :participant="participant"
             :unmuted="unmutedId === participant.id"
             @on-unmuted="(id) => (unmutedId = id)"
           />
         </div>
-      </article>
+      </div>
       <article class="ph3 pv3">
         <ShareContainer
           :title="postData.title"

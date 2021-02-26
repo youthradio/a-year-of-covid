@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative"
+    class="relative h-100"
     @pointerenter.prevent="
       restart()
       mute(false)
@@ -9,7 +9,7 @@
   >
     <video
       ref="video"
-      class="db w-100"
+      class="db w-100 h-100 object-fit-cover"
       loop
       autoplay
       controlsList="nodownload nofullscreen noremoteplayback"
@@ -24,7 +24,7 @@
         :type="`video/${video.type}`"
       />
     </video>
-    <span class="f4 absolute bottom-0 left-0 db pa3 bg-black-70 white">{{
+    <span class="f5 pa2 absolute bottom-0 left-0 db bg-black-70 white">{{
       participant.name
     }}</span>
   </div>
@@ -58,4 +58,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss"></style>
