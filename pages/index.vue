@@ -20,6 +20,7 @@
             class="f6 pointer dib grow no-underline br2 ph3 pv2 mb2 white bg-blue tc"
             @click.prevent="
               $refs.startMeeting.scrollIntoView({ behavior: 'smooth' })
+              startAudio()
             "
           >
             Start Meeting
@@ -41,25 +42,11 @@
         <div class="f7 o-40 tc" v-html="articleData.terms.text" />
 
         <div v-for="participant in participants" :key="participant.name">
-          {{ participant }}
-
-          <video
-            class="db w-100"
-            controls="false"
-            loop
-            autoplay
-            controlsList="nodownload nofullscreen noremoteplayback"
-            playsinline
-            muted
-            disablePictureInPicture
-          >
-            <source
-              v-for="video in participant.videos"
-              :key="video.url"
-              :src="video.url"
-              :type="`video/${video.type}`"
-            />
-          </video>
+          <video-player
+            :participant="participant"
+            :unmuted="unmutedId === participant.id"
+            @on-unmuted="(id) => (unmutedId = id)"
+          />
         </div>
       </article>
       <article class="ph3 pv3">
@@ -89,32 +76,35 @@
 </template>
 
 <script>
-import CommonUtils from '../mixins/CommonUtils'
+import { nanoid } from 'nanoid'
 import POSTCONFIG from '~/post.config'
 import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/Custom/ShareContainer'
 import ArticleData from '~/data/data.json'
+import VideoPlayer from '~/components_local/VideoPlayer.vue'
 
 export default {
   components: {
     MenuHeader,
     ShareContainer,
+    VideoPlayer,
   },
-  mixins: [CommonUtils],
   asyncData(ctx) {
     const articleData = ArticleData.content[0]
 
     return {
       postData: POSTCONFIG,
       articleData,
-      participants: articleData.participants,
+      participants: articleData.participants.map((p) =>
+        Object.assign(p, { id: nanoid() })
+      ),
     }
   },
   data() {
     return {
       audioPlayer: null,
       playerId: null,
-      isPlaying: false,
+      unmutedId: null,
     }
   },
   computed: {},
@@ -125,6 +115,12 @@ export default {
     this.audioPlayer.type = 'audio/mpeg'
   },
   methods: {
+    startAudio() {
+      const audioCtx = new AudioContext()
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume()
+      }
+    },
     playSong({ isPlaying, url, id }) {
       this.playerId = id
       if (!isPlaying) {
