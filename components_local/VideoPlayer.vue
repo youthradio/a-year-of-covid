@@ -20,7 +20,7 @@
       <source
         v-for="video in participant.videos"
         :key="video.url"
-        :src="video.url"
+        :src="`${videoFolder}/${video.file}`"
         :type="`video/${video.type}`"
       />
     </video>
@@ -34,6 +34,7 @@
 export default {
   props: {
     participant: { type: Object, required: true },
+    videoFolder: { type: String, required: true },
   },
   watch: {
     unmuted() {
@@ -49,10 +50,12 @@ export default {
     },
     restart() {
       this.$refs.video.currentTime = 0
+      this.play()
     },
     mute(state) {
       if (!state) this.$emit('on-unmuted', this.participant.id)
       this.$refs.video.muted = state
+      this.play()
     },
   },
 }

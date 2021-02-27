@@ -44,6 +44,7 @@
             class="mw5 w-50 w-100-ns"
           >
             <video-player
+              :video-folder="articleData.video_folder"
               :participant="participant"
               :unmuted="unmutedId === participant.id"
               @on-unmuted="(id) => (unmutedId = id)"
@@ -100,9 +101,9 @@ export default {
     return {
       postData: POSTCONFIG,
       articleData,
-      participants: articleData.participants.map((p) =>
-        Object.assign(p, { id: nanoid() })
-      ),
+      participants: articleData.participants
+        .map((p) => Object.assign(p, { id: nanoid() }))
+        .sort(() => 0.5 - Math.random()),
     }
   },
   data() {
