@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-column assistant relative">
-    <MenuHeader class="z-10" :menu-fixed="true" />
+    <MenuHeader class="z-10" :offset="100" :toggle-enable="true" />
     <!-- Slider div container -->
-    <div ref="container" class="h-100 w-100 m-menu">
+    <div ref="container" class="h-100 w-100">
       <!-- Additional required wrapper -->
       <!-- Slides -->
       <header
@@ -33,7 +33,7 @@
       </header>
       <div
         ref="startMeeting"
-        class="min-vh-100 bg-dark-gray flex items-center justify-center"
+        class="min-vh-menu bg-dark-gray flex items-center justify-center"
       >
         <div
           class="mw9 center h-100 flex flex-wrap justify-center align-stretch"
@@ -55,15 +55,15 @@
           <h3 class="tc">Chat</h3>
         </div>
       </div>
-      <article class="ph3 pv3">
+      <!-- <article class="ph3 pv3">
         <ShareContainer
           :title="postData.title"
           :description="postData.description"
           :tweet-message="postData.tweetMessage"
           :vertical-mode="false"
         />
-      </article>
-
+      </article> -->
+      <!-- 
       <article class="ph3 pv3">
         <div class="measure-wide center lh-copy">
           <h3 class="roboto-mono fw6 f3-ns f4 lh-title">CREDITS</h3>
@@ -76,7 +76,7 @@
             </dl>
           </template>
         </div>
-      </article>
+      </article> -->
     </div>
   </div>
 </template>
@@ -85,14 +85,14 @@
 import { nanoid } from 'nanoid'
 import POSTCONFIG from '~/post.config'
 import MenuHeader from '~/components/Header/MenuHeader'
-import ShareContainer from '~/components/Custom/ShareContainer'
+// import ShareContainer from '~/components/Custom/ShareContainer'
 import ArticleData from '~/data/data.json'
 import VideoPlayer from '~/components_local/VideoPlayer.vue'
 
 export default {
   components: {
     MenuHeader,
-    ShareContainer,
+    // ShareContainer,
     VideoPlayer,
   },
   asyncData(ctx) {
@@ -162,7 +162,10 @@ export default {
 button {
   font-family: $assistant;
 }
-.m-menu {
-  margin-top: 68px;
+.padding-menu {
+  padding-top: 68px;
+}
+.min-vh-menu {
+  min-height: calc(100vh - 68px);
 }
 </style>
