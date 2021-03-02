@@ -59,6 +59,11 @@ html {
     margin-top: 0;
   }
 }
+.reset-p {
+  p {
+    margin: 0;
+  }
+}
 .bounce-transition {
   transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -123,4 +128,23 @@ a:focus {
 }
 .object-fit-cover {
   object-fit: cover;
+}
+
+.video-max-w {
+  max-width: 7rem;
+  @media screen and (min-width: 281px) {
+    max-width: 8rem;
+  }
+  @media screen and (min-width: 321px) {
+    max-width: 10rem;
+  }
+  @media screen and (min-width: 400px) {
+    max-width: 11rem;
+  }
+  @media screen and (min-width: 700px) {
+    max-width: 15rem;
+  }
+  @media screen and (min-width: 1800px) {
+    max-width: 25rem;
+  }
 }

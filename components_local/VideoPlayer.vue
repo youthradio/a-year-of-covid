@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-100"
+    class="relative h-100 video-max-w"
     @pointerenter.prevent="
       restart()
       mute(false)
@@ -24,7 +24,7 @@
         :type="`video/${video.type}`"
       />
     </video>
-    <span class="f5 pa2 absolute bottom-0 left-0 db bg-black-70 white">{{
+    <span class="f6 pa2 absolute bottom-0 left-0 db bg-black-70 white">{{
       participant.name
     }}</span>
   </div>

@@ -38,11 +38,7 @@
         <div
           class="mw9 center h-100 flex flex-wrap justify-center align-stretch"
         >
-          <div
-            v-for="participant in participants"
-            :key="participant.name"
-            class="mw5 w-50 w-100-ns"
-          >
+          <div v-for="participant in participants" :key="participant.name">
             <video-player
               :video-folder="articleData.video_folder"
               :participant="participant"
@@ -51,8 +47,8 @@
             />
           </div>
         </div>
-        <div class="w-100 measure-narrow ml3 self-stretch bg-white">
-          <h3 class="tc">Chat</h3>
+        <div class="w-100 measure-narrow ml3 self-stretch bg-white dn db-l">
+          <chat :content="articleData.chat"></chat>
         </div>
       </div>
       <!-- <article class="ph3 pv3">
@@ -88,12 +84,14 @@ import MenuHeader from '~/components/Header/MenuHeader'
 // import ShareContainer from '~/components/Custom/ShareContainer'
 import ArticleData from '~/data/data.json'
 import VideoPlayer from '~/components_local/VideoPlayer.vue'
+import Chat from '~/components_local/Chat.vue'
 
 export default {
   components: {
     MenuHeader,
     // ShareContainer,
     VideoPlayer,
+    Chat,
   },
   asyncData(ctx) {
     const articleData = ArticleData.content[0]

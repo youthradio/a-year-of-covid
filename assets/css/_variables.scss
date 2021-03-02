@@ -124,7 +124,7 @@ $navy: #001b44 !default;
 $dark-blue: #00449e !default;
 $blue: #2f73e5 !default;
 $light-blue: #96ccff !default;
-$lightest-blue: #cdecff !default;
+$lightest-blue: #e9f1fc !default;
 $washed-blue: #f6fffe !default;
 $washed-green: #e8fdf5 !default;
 $washed-yellow: #fffceb !default;
@@ -132,10 +132,9 @@ $washed-red: #ffd299 !default;
 
 // Custom Media Query Variables
 
-$breakpoint-not-small: 'screen and (min-width: 30em)' !default;
-$breakpoint-medium: 'screen and (min-width: 30em) and (max-width: 60em)' !default;
-$breakpoint-large: 'screen and (min-width: 60em)' !default;
-
+$breakpoint-not-small: 'screen and (min-width: 40em)' !default;
+$breakpoint-medium: 'screen and (min-width: 40em) and (max-width: 60em)' !default;
+$breakpoint-large: 'screen and (min-width: 70em)' !default;
 /*
     VARIABLES
 */
