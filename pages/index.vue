@@ -33,7 +33,7 @@
       </header>
       <div
         ref="startMeeting"
-        class="min-vh-menu bg-dark-gray flex items-center justify-center"
+        class="min-vh-menu bg-dark-gray flex items-center justify-center relative"
       >
         <div
           class="mw9 center h-100 flex flex-wrap justify-center align-stretch"
@@ -50,6 +50,14 @@
         <div class="w-100 measure-narrow ml3 self-stretch bg-white dn db-l">
           <chat :content="articleData.chat"></chat>
         </div>
+        <credits
+          class="absolute bottom-0 left-0"
+          :content="articleData.credits"
+        />
+        <contributors
+          class="absolute bottom-0 right-0"
+          :content="participants"
+        />
       </div>
       <!-- <article class="ph3 pv3">
         <ShareContainer
@@ -85,6 +93,8 @@ import MenuHeader from '~/components/Header/MenuHeader'
 import ArticleData from '~/data/data.json'
 import VideoPlayer from '~/components_local/VideoPlayer.vue'
 import Chat from '~/components_local/Chat.vue'
+import Credits from '~/components_local/Credits.vue'
+import Contributors from '~/components_local/Contributors.vue'
 
 export default {
   components: {
@@ -92,6 +102,8 @@ export default {
     // ShareContainer,
     VideoPlayer,
     Chat,
+    Credits,
+    Contributors,
   },
   asyncData(ctx) {
     const articleData = ArticleData.content[0]

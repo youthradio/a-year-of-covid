@@ -1,9 +1,9 @@
 <template>
-  <div class="ph3">
+  <div class="ph3 lh-solid">
     <h3 class="tc">Chat</h3>
     <div>
       <template v-for="chat in content">
-        <div :key="chat.text">
+        <div :key="chat.text" class="mt3">
           <div>
             <span class="blue"> {{ chat.from }}</span> to
             <span class="blue">{{ chat.to }}</span>
