@@ -42,8 +42,8 @@
             <video-player
               :video-folder="articleData.video_folder"
               :participant="participant"
-              :unmuted="unmutedId === participant.id"
-              @on-unmuted="(id) => (unmutedId = id)"
+              :is-unmuted="unmutedId === participant.id"
+              @onunmuted="onUnmuted"
             />
           </div>
         </div>
@@ -137,18 +137,9 @@ export default {
         audioCtx.resume()
       }
     },
-    playSong({ isPlaying, url, id }) {
-      this.playerId = id
-      if (!isPlaying) {
-        this.audioPlayer.pause()
-        this.audioPlayer.src = url
-        this.audioPlayer.play()
-      } else {
-        this.playerId = null
-        this.isPlaying = false
-        this.audioPlayer.pause()
-        this.audioPlayer.currentTime = 0
-      }
+    onUnmuted({ id }) {
+      console.log('UNmuted', id)
+      this.unmutedId = id
     },
   },
 }

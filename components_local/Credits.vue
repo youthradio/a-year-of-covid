@@ -1,5 +1,5 @@
 <template>
-  <div class="f6 br4 pa2 bg-near-black light-silver mw5">
+  <div class="f6 br4 pa2 bg-near-black light-silver mw5 shadow-2">
     <span class="fw5">Credits</span>
     <ul class="list pa0">
       <li v-for="credit in content.list" :key="credit.title" class="pa0 ma0">

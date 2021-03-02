@@ -1,16 +1,16 @@
 <template>
   <div
     class="relative h-100 video-max-w"
-    @pointerenter.prevent="
-      restart()
-      mute(false)
+    @pointerdown.prevent="restartUnmute()"
+    @mouseover="restartUnmute()"
+    @mouseleave="
+      mute(true)
+      play()
     "
-    @pointerout.prevent="mute(true)"
   >
     <video
       ref="video"
       class="db w-100 h-100 object-fit-cover"
-      loop
       autoplay
       controlsList="nodownload nofullscreen noremoteplayback"
       playsinline
@@ -35,27 +35,40 @@ export default {
   props: {
     participant: { type: Object, required: true },
     videoFolder: { type: String, required: true },
+    isUnmuted: { type: Boolean, require: true },
   },
   watch: {
-    unmuted() {
-      this.mute(this.unmuted)
+    isUnmuted() {
+      if (!this.isUnmuted) {
+        this.mute(true)
+      }
     },
   },
+  mounted() {
+    this.$refs.video.addEventListener('play', this.onPlay)
+    this.$refs.video.addEventListener('ended', this.onEnded)
+  },
   methods: {
+    onEnded() {
+      this.mute(true)
+      this.play()
+    },
     play() {
       this.$refs.video.play()
     },
     pause() {
       this.$refs.video.pause()
     },
-    restart() {
+    restartUnmute() {
       this.$refs.video.currentTime = 0
+      this.$emit('onunmuted', { id: this.participant.id })
+      if (this.$refs.video.muted) {
+        this.mute(false)
+      }
       this.play()
     },
     mute(state) {
-      if (!state) this.$emit('on-unmuted', this.participant.id)
       this.$refs.video.muted = state
-      this.play()
     },
   },
 }

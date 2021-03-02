@@ -1,5 +1,5 @@
 <template>
-  <div class="ph3 lh-solid">
+  <div class="ph3 lh-solid shadow-2">
     <h3 class="tc">Chat</h3>
     <div>
       <template v-for="chat in content">
@@ -29,4 +29,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>
