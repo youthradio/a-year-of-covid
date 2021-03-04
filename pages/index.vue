@@ -35,8 +35,13 @@
         ref="startMeeting"
         class="vh-menu bg-dark-gray flex flex-column justify-between"
       >
-        <div class="flex items-center justify-center items-center flex-grow-1">
-          <div class="mw8 center flex flex-wrap justify-center">
+        <div
+          class="flex flex-auto items-center justify-center items-center flex-grow-1"
+        >
+          <div
+            v-show="bChat ? innerWidth > 750 : true"
+            class="mw8 center flex flex-wrap justify-center overflow-auto"
+          >
             <template v-for="participant in participants">
               <video-player
                 :key="participant.name"
@@ -48,29 +53,27 @@
             </template>
           </div>
           <div
-            v-if="bChat"
-            class="w-100 measure-narrow ml3 self-stretch bg-white absolute relative-ns bottom-0 overflow-x-scroll"
+            v-show="bChat"
+            class="measure-narrow ml3 bg-white overflow-auto h-100"
           >
             <chat :content="articleData.chat"></chat>
           </div>
         </div>
         <div class="relative">
-          <div class="flex justify-between items-end">
-            <contributors
-              v-if="bParticipants"
-              class="mr-auto absolute relative-ns left-0 bottom-0"
-              :content="participants"
-            />
-            <reactions
-              v-if="bReactions"
-              class="center absolute relative-ns left-0 bottom-0"
-            />
-            <credits
-              v-if="bCredits"
-              class="ml-auto absolute relative-ns right-0 bottom-0"
-              :content="articleData.credits"
-            />
-          </div>
+          <contributors
+            v-if="bParticipants"
+            class="mr-auto absolute left-2-ns bottom-2 z-2"
+            :content="participants"
+          />
+          <reactions
+            v-if="bReactions"
+            class="center absolute left-2-ns bottom-2 z-2"
+          />
+          <credits
+            v-if="bCredits"
+            class="ml-auto absolute right-2-ns bottom-2 z-2"
+            :content="articleData.credits"
+          />
           <div class="bg-near-black w-100">
             <menu-bar />
           </div>
@@ -146,6 +149,15 @@ export default {
     }
   },
   computed: {
+    innerWidth() {
+      if (typeof window !== 'undefined') {
+        return window.innerWidth
+      }
+      if (process.client) {
+        return window.innerWidth
+      }
+      return 0
+    },
     bCredits() {
       return this.$store.state.UIState.credits
     },
@@ -160,6 +172,9 @@ export default {
     },
   },
   watch: {},
+  created() {
+    this.setUIState({ chat: this.innerWidth > 750 })
+  },
   mounted() {
     this.audioPlayer = document.createElement('audio')
     this.audioPlayer.preload = 'metadata'

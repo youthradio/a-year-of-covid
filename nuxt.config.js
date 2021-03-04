@@ -105,11 +105,11 @@ export default {
   plugins: [
     {
       src: '~plugins/scroll-smooth.js',
-      ssr: false,
+      mode: 'client',
     },
     {
       src: '~plugins/lazysizes.js',
-      ssr: false,
+      mode: 'client',
     },
   ],
   /*

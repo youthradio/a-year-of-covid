@@ -2,7 +2,7 @@
   <div class="ph3 lh-solid">
     <h3 class="tc">Chat</h3>
     <div>
-      <template v-for="chat in content">
+      <template v-for="chat in content.concat(content).concat(content)">
         <div :key="chat.text" class="mt3">
           <div>
             <span class="blue"> {{ chat.from }}</span> to
