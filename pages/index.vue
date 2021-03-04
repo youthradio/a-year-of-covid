@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-column assistant relative">
-    <MenuHeader class="z-10" :offset="100" :toggle-enable="false" />
+    <MenuHeader class="z-10" />
     <!-- Slider div container -->
     <div ref="container" class="h-100 w-100">
       <!-- Additional required wrapper -->
@@ -49,7 +49,7 @@
         </div>
         <div
           v-if="bChat"
-          class="w-100 measure-narrow ml3 self-stretch bg-white absolute relative-ns bottom-0"
+          class="w-100 measure-narrow ml3 self-stretch bg-white absolute relative-ns bottom-0 min-vh-menu overflow-x-scroll"
         >
           <chat :content="articleData.chat"></chat>
         </div>

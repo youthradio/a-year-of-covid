@@ -1,41 +1,39 @@
 <template>
-  <div class="flex bg-near-black light-silver pv3 justify-center">
+  <div class="flex bg-near-black light-silver pv1 justify-center">
     <div class="ph2">
       <button
-        class="pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
+        class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
         @click.prevent="toggleUIState('contributors')"
       >
-        <peopleicon />
-
-        <span>Participants</span>
+        <peopleicon class="pv1 icon" />
+        <contributorstext class="text-size pv1" />
       </button>
     </div>
     <div class="ph2">
       <button
-        class="pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
+        class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
         @click.prevent="toggleUIState('chat')"
       >
-        <chaticon />
-        <span>Chat</span>
+        <chaticon class="pv1 icon" />
+        <chattext class="text-size pv1" />
       </button>
     </div>
     <div class="ph2">
       <button
-        class="pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
+        class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
         @click.prevent="toggleUIState('reactions')"
       >
-        <reactionsicon />
-
-        <span>Reactions</span>
+        <creditsicon class="pv1 icon" />
+        <creditstext class="text-size pv1" />
       </button>
     </div>
     <div class="ph2">
       <button
-        class="pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
+        class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
         @click.prevent="toggleUIState('credits')"
       >
-        <creditsicon />
-        <span>Credits</span>
+        <moreicon class="pv1 icon" />
+        <moretext class="text-size pv1" />
       </button>
     </div>
   </div>
@@ -53,4 +51,24 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped lang="scss">
+@import '~@/assets/css/variables';
+
+.text-size {
+  height: 0.5rem;
+}
+
+.icon {
+  height: 1.3rem;
+}
+
+.icon-hover:hover /deep/ .inner-path {
+  stroke: $green;
+}
+.icon-hover /deep/ .inner-path {
+  stroke: $silver;
+}
+button:focus {
+  outline: 0.1rem dashed rgba(lightgray, 0.1);
+}
+</style>
