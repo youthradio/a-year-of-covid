@@ -131,20 +131,25 @@ a:focus {
 }
 
 .video-max-w {
-  max-width: 7rem;
-  @media screen and (min-width: 281px) {
-    max-width: 8rem;
-  }
+  max-width: 8rem;
   @media screen and (min-width: 321px) {
     max-width: 10rem;
   }
-  @media screen and (min-width: 400px) {
-    max-width: 11rem;
-  }
-  @media screen and (min-width: 700px) {
-    max-width: 15rem;
-  }
-  @media screen and (min-width: 1800px) {
-    max-width: 25rem;
+  @media (orientation: landscape) {
+    @media screen and (min-width: 281px) {
+      max-width: 9rem;
+    }
+    @media screen and (min-width: 321px) {
+      max-width: 12rem;
+    }
+    @media screen and (min-width: 1050px) {
+      max-width: 15rem;
+    }
+    @media screen and (min-width: 1450px) {
+      max-width: 20rem;
+    }
+    @media screen and (min-width: 2050px) {
+      max-width: 30rem;
+    }
   }
 }

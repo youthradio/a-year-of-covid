@@ -33,40 +33,41 @@
       </header>
       <div
         ref="startMeeting"
-        class="flex flex items-center justify-center items-center min-vh-menu bg-dark-gray relative"
+        class="vh-menu bg-dark-gray flex flex-column justify-between"
       >
-        <div
-          class="mw8 center h-100 flex flex-wrap justify-center align-stretch"
-        >
-          <div v-for="participant in participants" :key="participant.name">
-            <video-player
-              :video-folder="articleData.video_folder"
-              :participant="participant"
-              :is-unmuted="unmutedId === participant.id"
-              @onunmuted="onUnmuted"
-            />
+        <div class="flex items-center justify-center items-center flex-grow-1">
+          <div class="mw8 center flex flex-wrap justify-center">
+            <template v-for="participant in participants">
+              <video-player
+                :key="participant.name"
+                :video-folder="articleData.video_folder"
+                :participant="participant"
+                :is-unmuted="unmutedId === participant.id"
+                @onunmuted="onUnmuted"
+              />
+            </template>
+          </div>
+          <div
+            v-if="bChat"
+            class="w-100 measure-narrow ml3 self-stretch bg-white absolute relative-ns bottom-0 overflow-x-scroll"
+          >
+            <chat :content="articleData.chat"></chat>
           </div>
         </div>
-        <div
-          v-if="bChat"
-          class="w-100 measure-narrow ml3 self-stretch bg-white absolute relative-ns bottom-0 min-vh-menu overflow-x-scroll"
-        >
-          <chat :content="articleData.chat"></chat>
-        </div>
-        <div class="bottom-0 absolute w-100">
+        <div class="relative">
           <div class="flex justify-between items-end">
             <contributors
               v-if="bParticipants"
-              class="mr-auto absolute relative-ns left-0"
+              class="mr-auto absolute relative-ns left-0 bottom-0"
               :content="participants"
             />
             <reactions
               v-if="bReactions"
-              class="center absolute relative-ns left-0"
+              class="center absolute relative-ns left-0 bottom-0"
             />
             <credits
               v-if="bCredits"
-              class="ml-auto absolute relative-ns right-0"
+              class="ml-auto absolute relative-ns right-0 bottom-0"
               :content="articleData.credits"
             />
           </div>
@@ -208,5 +209,8 @@ button {
 }
 .min-vh-menu {
   min-height: calc(100vh - 68px);
+}
+.vh-menu {
+  height: calc(100vh - 68px);
 }
 </style>
