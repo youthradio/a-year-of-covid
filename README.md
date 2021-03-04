@@ -10,9 +10,15 @@ This command will clone our base components repository
 git submodule add git@github.com:youthradio/base-components.git components
 ```
 
+You can also recursively pull the template which will include the components submodule
+
+```
+git clone --recursive git@github.com:youthradio/a-year-of-covid.git
+```
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm run install
 
@@ -53,9 +59,8 @@ git clone --single-branch --branch gh-pages git@github.com:youthradio/PROJECTNAM
 
 Update
 
-git fetch 
+git fetch
 git reset --hard FETCH_HEAD
-git clean -df 
+git clean -df
 
 ```
-
