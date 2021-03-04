@@ -1,7 +1,6 @@
 <template>
   <div
     class="f6 br4 pa2 bg-near-black light-silver mw5 shadow-2 container"
-    tabindex="-1"
     @focusout="onFocus"
   >
     <span class="fw5">Credits</span>

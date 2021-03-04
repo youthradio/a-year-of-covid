@@ -64,6 +64,7 @@
               v-if="bReactions"
               class="center absolute relative-ns left-0"
             />
+            <!-- Reactions could also be an array to fill a 'content' variable. The goal is to print respective emojis no matter what it is -->
             <credits
               v-if="bCredits"
               class="ml-auto absolute relative-ns right-0"
