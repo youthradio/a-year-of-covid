@@ -19,11 +19,16 @@ git clone --recursive git@github.com:youthradio/a-year-of-covid.git
 ## Build Setup
 
 ```bash
-# install dependencies
+# install dependencies via npm
 $ npm run install
+# install dependencies via yarn
+$ yarn install
 
-# serve with hot reload at localhost:3000
+
+# serve with hot reload at localhost:3000 via npm
 $ npm run dev
+# serve with hot reload at localhost:3000 via yarn
+$ yarn run dev
 
 # build for production and launch server
 $ npm run build
