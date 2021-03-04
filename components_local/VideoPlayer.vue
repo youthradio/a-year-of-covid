@@ -8,9 +8,12 @@
       play()
     "
   >
+    <div class="absolute w-100 h-100 flex justify-center items-center">
+      <img class="grow-large br-100 bn h2 w2 dib" :src="participant.image" />
+    </div>
     <video
       ref="video"
-      class="db w-100 h-100 object-fit-cover"
+      class="db w-100 h-100 object-fit-cover relative"
       autoplay
       controlsList="nodownload nofullscreen noremoteplayback"
       playsinline
@@ -24,6 +27,7 @@
         :type="`video/${video.type}`"
       />
     </video>
+
     <span class="f6 pa2 absolute bottom-0 left-0 db bg-black-70 white">{{
       participant.name
     }}</span>
