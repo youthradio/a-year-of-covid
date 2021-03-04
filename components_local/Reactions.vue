@@ -1,16 +1,15 @@
 <template>
   <div
-    class="f6 br4 pa2 bg-near-black light-silver mw5 shadow-2 container"
+    class="f6 br4 pa2 bg-near-black light-silver mw5 shadow-2 container flex"
     tabindex="-1"
     @focusout="onFocus"
   >
-    <span class="fw5">Credits</span>
-    <ul class="list pa0">
-      <li v-for="credit in content.list" :key="credit.title" class="pa0 ma0">
-        <span class="fw5">{{ credit.title }}</span
-        ><span class="fw1"> {{ credit.names }}</span>
-      </li>
-    </ul>
+    <span class="f5 db">👏</span>
+    <span class="f5 db">👏</span>
+    <span class="f5 db">👏</span>
+    <span class="f5 db">👏</span>
+    <span class="f5 db">👏</span>
+    <span class="f5 db">👏</span>
   </div>
 </template>
 
@@ -28,7 +27,7 @@ export default {
   methods: {
     onFocus(e) {
       if (e.type === 'focusout') {
-        this.$store.dispatch('toggleUIState', 'credits')
+        this.$store.dispatch('toggleUIState', 'reactions')
       }
     },
   },

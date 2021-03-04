@@ -1,5 +1,5 @@
 <template>
-  <div class="ph3 lh-solid shadow-2">
+  <div class="ph3 lh-solid">
     <h3 class="tc">Chat</h3>
     <div>
       <template v-for="chat in content">

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-column assistant relative">
-    <MenuHeader class="z-10" :offset="100" :toggle-enable="true" />
+    <MenuHeader class="z-10" :offset="100" :toggle-enable="false" />
     <!-- Slider div container -->
     <div ref="container" class="h-100 w-100">
       <!-- Additional required wrapper -->
@@ -33,10 +33,10 @@
       </header>
       <div
         ref="startMeeting"
-        class="min-vh-menu bg-dark-gray flex items-center justify-center relative"
+        class="flex flex items-center justify-center items-center min-vh-menu bg-dark-gray relative"
       >
         <div
-          class="mw9 center h-100 flex flex-wrap justify-center align-stretch"
+          class="mw8 center h-100 flex flex-wrap justify-center align-stretch"
         >
           <div v-for="participant in participants" :key="participant.name">
             <video-player
@@ -47,18 +47,35 @@
             />
           </div>
         </div>
-        <div class="w-100 measure-narrow ml3 self-stretch bg-white dn db-l">
+        <div
+          v-if="bChat"
+          class="w-100 measure-narrow ml3 self-stretch bg-white absolute relative-ns bottom-0"
+        >
           <chat :content="articleData.chat"></chat>
         </div>
-        <credits
-          class="absolute bottom-0 left-0"
-          :content="articleData.credits"
-        />
-        <contributors
-          class="absolute bottom-0 right-0"
-          :content="participants"
-        />
+        <div class="bottom-0 absolute w-100">
+          <div class="flex justify-between items-end">
+            <contributors
+              v-if="bParticipants"
+              class="mr-auto absolute relative-ns left-0"
+              :content="participants"
+            />
+            <reactions
+              v-if="bReactions"
+              class="center absolute relative-ns left-0"
+            />
+            <credits
+              v-if="bCredits"
+              class="ml-auto absolute relative-ns right-0"
+              :content="articleData.credits"
+            />
+          </div>
+          <div class="bg-near-black w-100">
+            <menu-bar />
+          </div>
+        </div>
       </div>
+
       <!-- <article class="ph3 pv3">
         <ShareContainer
           :title="postData.title"
@@ -95,6 +112,8 @@ import VideoPlayer from '~/components_local/VideoPlayer.vue'
 import Chat from '~/components_local/Chat.vue'
 import Credits from '~/components_local/Credits.vue'
 import Contributors from '~/components_local/Contributors.vue'
+import MenuBar from '~/components_local/MenuBar.vue'
+import Reactions from '~/components_local/Reactions.vue'
 
 export default {
   components: {
@@ -104,6 +123,8 @@ export default {
     Chat,
     Credits,
     Contributors,
+    MenuBar,
+    Reactions,
   },
   asyncData(ctx) {
     const articleData = ArticleData.content[0]
@@ -123,7 +144,20 @@ export default {
       unmutedId: null,
     }
   },
-  computed: {},
+  computed: {
+    bCredits() {
+      return this.$store.state.UIState.credits
+    },
+    bReactions() {
+      return this.$store.state.UIState.reactions
+    },
+    bChat() {
+      return this.$store.state.UIState.chat
+    },
+    bParticipants() {
+      return this.$store.state.UIState.contributors
+    },
+  },
   watch: {},
   mounted() {
     this.audioPlayer = document.createElement('audio')
@@ -131,6 +165,13 @@ export default {
     this.audioPlayer.type = 'audio/mpeg'
   },
   methods: {
+    toggleAllUI() {
+      const all = ['contributors', 'credits', 'reactions']
+      this.setUIState(Object.fromEntries(all.map((e) => [e, false])))
+    },
+    setUIState(state) {
+      this.$store.dispatch('setUIState', state)
+    },
     startAudio() {
       const audioCtx = new AudioContext()
       if (audioCtx.state === 'suspended') {
@@ -138,7 +179,6 @@ export default {
       }
     },
     onUnmuted({ id }) {
-      console.log('UNmuted', id)
       this.unmutedId = id
     },
   },

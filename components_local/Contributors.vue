@@ -1,5 +1,9 @@
 <template>
-  <div class="f6 br4 pa2 bg-near-black light-silver mw6">
+  <div
+    class="f6 br4 pa2 bg-near-black light-silver mw6 shadow-2 container"
+    tabindex="-1"
+    @focusout="onFocus"
+  >
     <span class="fw5">Contributors</span>
     <ul class="list pa0">
       <li
@@ -57,7 +61,21 @@ export default {
       required: true,
     },
   },
+  mounted() {
+    this.$el.focus()
+  },
+  methods: {
+    onFocus(e) {
+      if (e.type === 'focusout') {
+        this.$store.dispatch('toggleUIState', 'contributors')
+      }
+    },
+  },
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.container:focus {
+  outline: 0.1rem dashed rgba(lightgray, 0.1);
+}
+</style>
