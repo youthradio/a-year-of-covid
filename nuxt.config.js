@@ -145,6 +145,8 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, { isDev, isClient, loaders: { vue } }) {
+      config.resolve.alias.vue = 'vue/dist/vue.common'
+
       if (isClient) {
         vue.transformAssetUrls.img = ['data-src', 'src']
         vue.transformAssetUrls.source = ['data-srcset', 'srcset']
