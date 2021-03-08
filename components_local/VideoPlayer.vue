@@ -13,7 +13,7 @@
     </div>
     <video
       ref="video"
-      class="db w-100 object-fit-cover relative"
+      class="db w-100 h-100 object-fit-cover relative"
       autoplay
       controlsList="nodownload nofullscreen noremoteplayback"
       playsinline

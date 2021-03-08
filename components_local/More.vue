@@ -4,12 +4,14 @@
     tabindex="-1"
     @focusout="onFocus"
   >
-    <h4 class="fw5 b lh-title">Credits</h4>
-
+    <h4 class="fw5 b lh-title">{{ content.title }}</h4>
     <ul class="list pa0 lh-copy">
-      <li v-for="credit in content.list" :key="credit.title" class="pa0 ma0">
-        <span class="fw5">{{ credit.title }}</span
-        ><span class="fw1"> {{ credit.names }}</span>
+      <li v-for="link in content.links" :key="link.title" class="pa0 ma0">
+        <a
+          class="light-silver link db fw5 dim no-underline underline-hover"
+          :href="link.link"
+          >{{ link.title }}</a
+        >
       </li>
     </ul>
   </div>

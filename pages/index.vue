@@ -38,8 +38,8 @@
         <div class="flex-auto flex">
           <div class="flex items-center justify-center items-center w-100">
             <div
-              v-show="bChat ? innerWidth > 750 : true"
-              class="mw8 center flex flex-wrap justify-center"
+              v-show="UIState.chat ? innerWidth() > 750 : true"
+              class="mw8 center flex flex-auto flex-wrap justify-center"
             >
               <template v-for="participant in participants">
                 <video-player
@@ -52,7 +52,7 @@
               </template>
             </div>
             <div
-              v-show="bChat"
+              v-show="UIState.chat"
               class="measure-narrow ml3 bg-white overflow-y-scroll h-100"
             >
               <chat :content="articleData.chat"></chat>
@@ -61,53 +61,36 @@
         </div>
         <div class="relative">
           <contributors
-            v-if="bParticipants"
-            class="mr-auto absolute left-2-ns bottom-2 z-2"
+            v-show="UIState.contributors"
+            class="absolute z-2 center-box"
             :content="participants"
           />
           <reactions
-            v-if="bReactions"
-            class="center absolute left-2-ns bottom-2 z-2"
+            v-show="UIState.reactions"
+            class="absolute z-2 center-box"
           />
           <credits
-            v-if="bCredits"
-            class="ml-auto absolute right-2-ns bottom-2 z-2"
+            v-show="UIState.credits"
+            class="absolute z-2 center-box"
             :content="articleData.credits"
+          />
+          <more
+            v-show="UIState.more"
+            class="absolute z-2 center-box"
+            :content="articleData.more"
           />
           <div class="bg-near-black w-100">
             <menu-bar />
           </div>
         </div>
       </div>
-
-      <!-- <article class="ph3 pv3">
-        <ShareContainer
-          :title="postData.title"
-          :description="postData.description"
-          :tweet-message="postData.tweetMessage"
-          :vertical-mode="false"
-        />
-      </article> -->
-      <!-- 
-      <article class="ph3 pv3">
-        <div class="measure-wide center lh-copy">
-          <h3 class="roboto-mono fw6 f3-ns f4 lh-title">CREDITS</h3>
-          <div v-html="articleData.credits.text"></div>
-
-          <template v-for="credit in articleData.credits.list">
-            <dl :key="credit.ttitle" class="lh-title mv2">
-              <dt class="dib b green">{{ credit.title }}:</dt>
-              <dd class="di ml0">{{ credit.names }}</dd>
-            </dl>
-          </template>
-        </div>
-      </article> -->
     </div>
   </div>
 </template>
 
 <script>
 import { nanoid } from 'nanoid'
+import CommonUtils from '../mixins/CommonUtils'
 import POSTCONFIG from '~/post.config'
 import MenuHeader from '~/components/Header/MenuHeader'
 // import ShareContainer from '~/components/Custom/ShareContainer'
@@ -118,6 +101,7 @@ import Credits from '~/components_local/Credits.vue'
 import Contributors from '~/components_local/Contributors.vue'
 import MenuBar from '~/components_local/MenuBar.vue'
 import Reactions from '~/components_local/Reactions.vue'
+import More from '~/components_local/More.vue'
 
 export default {
   components: {
@@ -129,7 +113,10 @@ export default {
     Contributors,
     MenuBar,
     Reactions,
+    More,
   },
+  mixins: [CommonUtils],
+
   asyncData(ctx) {
     const articleData = ArticleData.content[0]
 
@@ -143,12 +130,24 @@ export default {
   },
   data() {
     return {
-      audioPlayer: null,
-      playerId: null,
       unmutedId: null,
     }
   },
   computed: {
+    UIState() {
+      return this.$store.state.UIState
+    },
+  },
+  watch: {},
+  created() {
+    this.setUIState({ chat: this.innerWidth() > 750 })
+  },
+  mounted() {
+    window.addEventListener('resize', (event) =>
+      this.debouceEvent(event, this.onWindowResize)
+    )
+  },
+  methods: {
     innerWidth() {
       if (typeof window !== 'undefined') {
         return window.innerWidth
@@ -158,29 +157,9 @@ export default {
       }
       return 0
     },
-    bCredits() {
-      return this.$store.state.UIState.credits
+    onWindowResize() {
+      this.setUIState({ chat: this.innerWidth() > 750 })
     },
-    bReactions() {
-      return this.$store.state.UIState.reactions
-    },
-    bChat() {
-      return this.$store.state.UIState.chat
-    },
-    bParticipants() {
-      return this.$store.state.UIState.contributors
-    },
-  },
-  watch: {},
-  created() {
-    this.setUIState({ chat: this.innerWidth > 750 })
-  },
-  mounted() {
-    this.audioPlayer = document.createElement('audio')
-    this.audioPlayer.preload = 'metadata'
-    this.audioPlayer.type = 'audio/mpeg'
-  },
-  methods: {
     toggleAllUI() {
       const all = ['contributors', 'credits', 'reactions']
       this.setUIState(Object.fromEntries(all.map((e) => [e, false])))
@@ -227,5 +206,10 @@ button {
 }
 .vh-menu {
   height: calc(100vh - 68px);
+}
+.center-box {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 100%;
 }
 </style>

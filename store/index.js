@@ -4,8 +4,10 @@ export const state = () => ({
     credits: false,
     reactions: false,
     contributors: false,
+    more: false,
   },
 })
+const SINGLES = ['contributors', 'credits', 'reactions', 'more']
 
 export const actions = {
   setUIState({ commit }, newstate) {
@@ -20,6 +22,11 @@ export const mutations = {
     if (!(element in state.UIState)) {
       throw new Error("UIState property doesn't exist")
     }
+
+    SINGLES.filter((e) => e !== element).forEach((e) => {
+      state.UIState[e] = false
+    }) // remove element from list
+
     state.UIState = Object.assign(state.UIState, {
       [element]: !state.UIState[element],
     })

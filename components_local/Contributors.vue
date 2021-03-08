@@ -39,7 +39,7 @@ export default {
   methods: {
     onFocus(e) {
       if (e.type === 'focusout') {
-        this.$store.dispatch('toggleUIState', 'contributors')
+        // this.$store.dispatch('toggleUIState', 'contributors')
       }
     },
   },
