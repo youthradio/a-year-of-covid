@@ -67,32 +67,6 @@
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-        <div
-          v-if="bChat"
-          class="w-100 measure-narrow ml3 self-stretch bg-white absolute relative-ns bottom-0 min-vh-menu overflow-x-scroll"
-        >
-          <chat :content="articleData.chat"></chat>
-        </div>
-        <div class="bottom-0 absolute w-100">
-          <div class="flex justify-between items-end">
-            <contributors
-              v-if="bParticipants"
-              class="mr-auto absolute relative-ns left-0"
-              :content="participants"
-            />
-            <reactions
-              v-if="bReactions"
-              class="center absolute relative-ns left-0"
-            />
-            <!-- Reactions could also be an array to fill a 'content' variable. The goal is to print respective emojis no matter what it is -->
-            <credits
-              v-if="bCredits"
-              class="ml-auto absolute relative-ns right-0"
-              :content="articleData.credits"
-            />
-          </div>
-=======
         <div class="relative">
           <contributors
             v-show="UIState.contributors"
@@ -113,7 +87,6 @@
             class="absolute z-2 center-box"
             :content="articleData.more"
           />
->>>>>>> 3d44cd6737805b7df2f4653db7850aa93bfb118e
           <div class="bg-near-black w-100">
             <menu-bar />
           </div>

@@ -2,7 +2,7 @@ export const state = () => ({
   UIState: {
     chat: true,
     credits: false,
-    reactions: false,
+    reactions: true,
     contributors: false,
     more: false,
   },
