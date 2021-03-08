@@ -44,6 +44,9 @@ html {
 .flex-grow-2 {
   flex-grow: 2;
 }
+.flex-reset {
+  flex: 0 0 auto;
+}
 .bg-oc-washed-red {
   background: rgba($washed-red, 0.5);
 }
@@ -152,4 +155,11 @@ a:focus {
       max-width: 30rem;
     }
   }
+}
+
+.grid {
+  display: grid;
+}
+.min-content {
+  min-height: min-content;
 }

@@ -35,28 +35,28 @@
         ref="startMeeting"
         class="vh-menu bg-dark-gray flex flex-column justify-between"
       >
-        <div
-          class="flex flex-auto items-center justify-center items-center flex-grow-1"
-        >
-          <div
-            v-show="bChat ? innerWidth > 750 : true"
-            class="mw8 center flex flex-wrap justify-center overflow-auto"
-          >
-            <template v-for="participant in participants">
-              <video-player
-                :key="participant.name"
-                :video-folder="articleData.video_folder"
-                :participant="participant"
-                :is-unmuted="unmutedId === participant.id"
-                @onunmuted="onUnmuted"
-              />
-            </template>
-          </div>
-          <div
-            v-show="bChat"
-            class="measure-narrow ml3 bg-white overflow-auto h-100"
-          >
-            <chat :content="articleData.chat"></chat>
+        <div class="flex-auto flex">
+          <div class="flex items-center justify-center items-center w-100">
+            <div
+              v-show="bChat ? innerWidth > 750 : true"
+              class="mw8 center flex flex-wrap justify-center"
+            >
+              <template v-for="participant in participants">
+                <video-player
+                  :key="participant.name"
+                  :video-folder="articleData.video_folder"
+                  :participant="participant"
+                  :is-unmuted="unmutedId === participant.id"
+                  @onunmuted="onUnmuted"
+                />
+              </template>
+            </div>
+            <div
+              v-show="bChat"
+              class="measure-narrow ml3 bg-white overflow-y-scroll h-100"
+            >
+              <chat :content="articleData.chat"></chat>
+            </div>
           </div>
         </div>
         <div class="relative">
