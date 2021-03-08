@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-column assistant relative">
+  <div class="flex flex-column assistant relative ios-bar-fix">
     <MenuHeader class="z-10" />
     <!-- Slider div container -->
     <div ref="container" class="h-100 w-100">
@@ -33,20 +33,41 @@
       </header>
       <div
         ref="startMeeting"
-        class="flex flex items-center justify-center items-center min-vh-menu bg-dark-gray relative"
+        class="vh-menu bg-dark-gray flex flex-column justify-between"
       >
-        <div
-          class="mw8 center h-100 flex flex-wrap justify-center align-stretch"
-        >
-          <div v-for="participant in participants" :key="participant.name">
-            <video-player
-              :video-folder="articleData.video_folder"
-              :participant="participant"
-              :is-unmuted="unmutedId === participant.id"
-              @onunmuted="onUnmuted"
-            />
+        <div class="flex-auto flex">
+          <div class="flex items-center justify-center items-center w-100">
+            <div
+              v-show="UIState.chat ? innerWidth() > 750 : true"
+              class="mw8 center grid grid-auto-rows grid-container--fit"
+            >
+              <template v-for="(participant, i) in participants">
+                <video-player
+                  :key="participant.name"
+                  :style="
+                    i > 5 && innerWidth() > 750
+                      ? {
+                          gridColumn: i > 6 ? 3 : 2,
+                          transform: 'translateX(-50%)',
+                        }
+                      : {}
+                  "
+                  :video-folder="articleData.video_folder"
+                  :participant="participant"
+                  :is-unmuted="unmutedId === participant.id"
+                  @onunmuted="onUnmuted"
+                />
+              </template>
+            </div>
+            <div
+              v-show="UIState.chat"
+              class="measure-narrow ml3 bg-white overflow-y-scroll h-100"
+            >
+              <chat :content="articleData.chat"></chat>
+            </div>
           </div>
         </div>
+<<<<<<< HEAD
         <div
           v-if="bChat"
           class="w-100 measure-narrow ml3 self-stretch bg-white absolute relative-ns bottom-0 min-vh-menu overflow-x-scroll"
@@ -71,40 +92,40 @@
               :content="articleData.credits"
             />
           </div>
+=======
+        <div class="relative">
+          <contributors
+            v-show="UIState.contributors"
+            class="absolute z-2 center-box"
+            :content="participants"
+          />
+          <reactions
+            v-show="UIState.reactions"
+            class="absolute z-2 center-box"
+          />
+          <credits
+            v-show="UIState.credits"
+            class="absolute z-2 center-box"
+            :content="articleData.credits"
+          />
+          <more
+            v-show="UIState.more"
+            class="absolute z-2 center-box"
+            :content="articleData.more"
+          />
+>>>>>>> 3d44cd6737805b7df2f4653db7850aa93bfb118e
           <div class="bg-near-black w-100">
             <menu-bar />
           </div>
         </div>
       </div>
-
-      <!-- <article class="ph3 pv3">
-        <ShareContainer
-          :title="postData.title"
-          :description="postData.description"
-          :tweet-message="postData.tweetMessage"
-          :vertical-mode="false"
-        />
-      </article> -->
-      <!-- 
-      <article class="ph3 pv3">
-        <div class="measure-wide center lh-copy">
-          <h3 class="roboto-mono fw6 f3-ns f4 lh-title">CREDITS</h3>
-          <div v-html="articleData.credits.text"></div>
-
-          <template v-for="credit in articleData.credits.list">
-            <dl :key="credit.ttitle" class="lh-title mv2">
-              <dt class="dib b green">{{ credit.title }}:</dt>
-              <dd class="di ml0">{{ credit.names }}</dd>
-            </dl>
-          </template>
-        </div>
-      </article> -->
     </div>
   </div>
 </template>
 
 <script>
 import { nanoid } from 'nanoid'
+import CommonUtils from '../mixins/CommonUtils'
 import POSTCONFIG from '~/post.config'
 import MenuHeader from '~/components/Header/MenuHeader'
 // import ShareContainer from '~/components/Custom/ShareContainer'
@@ -115,6 +136,7 @@ import Credits from '~/components_local/Credits.vue'
 import Contributors from '~/components_local/Contributors.vue'
 import MenuBar from '~/components_local/MenuBar.vue'
 import Reactions from '~/components_local/Reactions.vue'
+import More from '~/components_local/More.vue'
 
 export default {
   components: {
@@ -126,7 +148,10 @@ export default {
     Contributors,
     MenuBar,
     Reactions,
+    More,
   },
+  mixins: [CommonUtils],
+
   asyncData(ctx) {
     const articleData = ArticleData.content[0]
 
@@ -140,32 +165,37 @@ export default {
   },
   data() {
     return {
-      audioPlayer: null,
-      playerId: null,
       unmutedId: null,
     }
   },
   computed: {
-    bCredits() {
-      return this.$store.state.UIState.credits
-    },
-    bReactions() {
-      return this.$store.state.UIState.reactions
-    },
-    bChat() {
-      return this.$store.state.UIState.chat
-    },
-    bParticipants() {
-      return this.$store.state.UIState.contributors
+    UIState() {
+      return this.$store.state.UIState
     },
   },
   watch: {},
+  created() {
+    this.setUIState({ chat: this.innerWidth() > 750 })
+  },
   mounted() {
-    this.audioPlayer = document.createElement('audio')
-    this.audioPlayer.preload = 'metadata'
-    this.audioPlayer.type = 'audio/mpeg'
+    window.addEventListener('resize', (event) =>
+      this.debouceEvent(event, this.onWindowResize)
+    )
+    setTimeout(() => window.scrollTo(0, 10), 1000)
   },
   methods: {
+    innerWidth() {
+      if (typeof window !== 'undefined') {
+        return window.innerWidth
+      }
+      if (process.client) {
+        return window.innerWidth
+      }
+      return 0
+    },
+    onWindowResize() {
+      this.setUIState({ chat: this.innerWidth() > 750 })
+    },
     toggleAllUI() {
       const all = ['contributors', 'credits', 'reactions']
       this.setUIState(Object.fromEntries(all.map((e) => [e, false])))
@@ -174,6 +204,7 @@ export default {
       this.$store.dispatch('setUIState', state)
     },
     startAudio() {
+      const AudioContext = window.AudioContext || window.webkitAudioContext
       const audioCtx = new AudioContext()
       if (audioCtx.state === 'suspended') {
         audioCtx.resume()
@@ -209,5 +240,13 @@ button {
 }
 .min-vh-menu {
   min-height: calc(100vh - 68px);
+}
+.vh-menu {
+  height: calc(100vh - 68px);
+}
+.center-box {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 100%;
 }
 </style>

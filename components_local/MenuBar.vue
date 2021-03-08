@@ -21,7 +21,7 @@
     <div class="ph2">
       <button
         class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
-        @click.prevent="toggleUIState('reactions')"
+        @click.prevent="toggleUIState('credits')"
       >
         <creditsicon class="pv1 icon" />
         <creditstext class="text-size pv1" />
@@ -30,7 +30,7 @@
     <div class="ph2">
       <button
         class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
-        @click.prevent="toggleUIState('credits')"
+        @click.prevent="toggleUIState('more')"
       >
         <moreicon class="pv1 icon" />
         <moretext class="text-size pv1" />

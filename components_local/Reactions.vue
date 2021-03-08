@@ -20,12 +20,7 @@
 
 <script>
 export default {
-  props: {
-    content: {
-      type: Object,
-      required: true,
-    },
-  },
+  props: {},
   mounted() {
     this.$el.focus()
   },

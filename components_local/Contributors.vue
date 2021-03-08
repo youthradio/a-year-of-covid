@@ -1,6 +1,11 @@
 <template>
   <div
+<<<<<<< HEAD
     class="f6 br4 pa2 bg-near-black light-silver mw6 shadow-2 container"
+=======
+    class="f6 br4 pa2 bg-near-black light-silver w-100 mw6 shadow-2 container"
+    tabindex="-1"
+>>>>>>> 3d44cd6737805b7df2f4653db7850aa93bfb118e
     @focusout="onFocus"
   >
     <span class="fw5">Contributors</span>
@@ -38,7 +43,7 @@ export default {
   methods: {
     onFocus(e) {
       if (e.type === 'focusout') {
-        this.$store.dispatch('toggleUIState', 'contributors')
+        // this.$store.dispatch('toggleUIState', 'contributors')
       }
     },
   },
