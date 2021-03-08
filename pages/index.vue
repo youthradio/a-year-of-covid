@@ -39,11 +39,19 @@
           <div class="flex items-center justify-center items-center w-100">
             <div
               v-show="UIState.chat ? innerWidth() > 750 : true"
-              class="mw8 center flex flex-auto flex-wrap justify-center"
+              class="mw8 center grid grid-auto-rows grid-container--fit"
             >
-              <template v-for="participant in participants">
+              <template v-for="(participant, i) in participants">
                 <video-player
                   :key="participant.name"
+                  :style="
+                    i > 5 && innerWidth() > 750
+                      ? {
+                          gridColumn: i > 6 ? 3 : 2,
+                          transform: 'translateX(-50%)',
+                        }
+                      : {}
+                  "
                   :video-folder="articleData.video_folder"
                   :participant="participant"
                   :is-unmuted="unmutedId === participant.id"

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative video-max-w"
+    class="relative center"
     @pointerdown.prevent="restartUnmute()"
     @mouseover="restartUnmute()"
     @mouseleave="
