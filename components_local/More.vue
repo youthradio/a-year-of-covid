@@ -1,6 +1,6 @@
 <template>
   <div
-    class="f6 br4 pa2 bg-near-black light-silver mw6 shadow-2 container"
+    class="f6 br4 pa2 bg-near-black light-silver w-100 mw6 shadow-2 container"
     tabindex="-1"
     @focusout="onFocus"
   >

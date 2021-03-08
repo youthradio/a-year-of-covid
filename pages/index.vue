@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-column assistant relative">
+  <div class="flex flex-column assistant relative ios-bar-fix">
     <MenuHeader class="z-10" />
     <!-- Slider div container -->
     <div ref="container" class="h-100 w-100">
@@ -154,6 +154,7 @@ export default {
     window.addEventListener('resize', (event) =>
       this.debouceEvent(event, this.onWindowResize)
     )
+    setTimeout(() => window.scrollTo(0, 10), 1000)
   },
   methods: {
     innerWidth() {
@@ -176,6 +177,7 @@ export default {
       this.$store.dispatch('setUIState', state)
     },
     startAudio() {
+      const AudioContext = window.AudioContext || window.webkitAudioContext
       const audioCtx = new AudioContext()
       if (audioCtx.state === 'suspended') {
         audioCtx.resume()

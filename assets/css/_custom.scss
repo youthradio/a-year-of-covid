@@ -186,3 +186,9 @@ a:focus {
 .min-content {
   min-height: min-content;
 }
+
+.ios-bar-fix {
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
