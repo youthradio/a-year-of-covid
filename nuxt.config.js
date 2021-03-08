@@ -160,7 +160,9 @@ export default {
       },
     },
   },
-  // server: {
+  server: {
+    host: '0.0.0.0',
+  },
   //   https: {
   //     key: readFileSync(`${process.env.SSLKEY}`),
   //     cert: readFileSync(`${process.env.SSLCRT}`)

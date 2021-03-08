@@ -38,14 +38,14 @@
         <div class="flex-auto flex">
           <div class="flex items-center justify-center items-center w-100">
             <div
-              v-show="UIState.chat ? innerWidth() > 750 : true"
-              class="mw8 center grid grid-auto-rows grid-container--fit"
+              v-show="UIState.chat ? innerWidth > 750 : true"
+              class="mw8 cente ph4 grid grid-auto-rows grid-container--fit"
             >
               <template v-for="(participant, i) in participants">
                 <video-player
                   :key="participant.name"
                   :style="
-                    i > 5 && innerWidth() > 750
+                    i > 5 && innerWidth > 550
                       ? {
                           gridColumn: i > 6 ? 3 : 2,
                           transform: 'translateX(-50%)',
@@ -61,7 +61,7 @@
             </div>
             <div
               v-show="UIState.chat"
-              class="measure-narrow ml3 bg-white overflow-y-scroll h-100"
+              class="measure-narrow ml3-ns bg-white overflow-y-scroll h-100"
             >
               <chat :content="articleData.chat"></chat>
             </div>
@@ -138,6 +138,7 @@ export default {
   },
   data() {
     return {
+      innerWidth: 0,
       unmutedId: null,
     }
   },
@@ -146,28 +147,29 @@ export default {
       return this.$store.state.UIState
     },
   },
-  watch: {},
-  created() {
-    this.setUIState({ chat: this.innerWidth() > 750 })
+  watch: {
+    innerWidth() {
+      this.setUIState({ chat: this.innerWidth > 750 })
+    },
   },
+
   mounted() {
     window.addEventListener('resize', (event) =>
       this.debouceEvent(event, this.onWindowResize)
     )
     setTimeout(() => window.scrollTo(0, 10), 1000)
+    this.onWindowResize()
+    this.setUIState({ chat: this.innerWidth > 750 })
   },
   methods: {
-    innerWidth() {
+    onWindowResize() {
       if (typeof window !== 'undefined') {
-        return window.innerWidth
+        this.innerWidth = window.innerWidth
       }
       if (process.client) {
-        return window.innerWidth
+        this.innerWidth = window.innerWidth
       }
-      return 0
-    },
-    onWindowResize() {
-      this.setUIState({ chat: this.innerWidth() > 750 })
+      this.innerWidth = window.innerWidth
     },
     toggleAllUI() {
       const all = ['contributors', 'credits', 'reactions']
