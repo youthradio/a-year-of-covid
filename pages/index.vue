@@ -140,7 +140,7 @@ export default {
   data() {
     return {
       unmutedId: null,
-      emojis: ['😱', '😢', '😐', '🙃', '😅'],
+      emojis: ['👏', '👍', '❤️', '😂', '🎉'],
     }
   },
   computed: {
