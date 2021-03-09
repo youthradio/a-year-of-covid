@@ -33,7 +33,7 @@ export default {
       console.log('Recieved a click, emoji is ' + emoji)
       console.log(this.$refs.emojiSpace)
 
-      // generate a random size for randomized properties (clamp it below a specific size soon)
+      // generate a random size for randomized properties (clamp a fixed bottom size soon)
       const randoSize = Math.floor(Math.random() * 40 + 5)
       const dice = Math.random() > 0.5 ? 1 : 0
       console.log(dice)
