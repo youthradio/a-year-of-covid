@@ -76,6 +76,7 @@
           <reactions
             v-show="UIState.reactions"
             class="absolute z-2 center-box"
+            :content="emojis"
           />
           <credits
             v-show="UIState.credits"
@@ -139,6 +140,7 @@ export default {
   data() {
     return {
       unmutedId: null,
+      emojis: ['😱', '😢', '😐', '🙃', '😅'],
     }
   },
   computed: {
