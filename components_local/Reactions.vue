@@ -26,14 +26,55 @@ export default {
     test(emoji) {
       console.log('Recieved a click, emoji is ' + emoji)
       console.log(this.$refs.emojiSpace)
+
+      // generate a random size for randomized properties (clamp it below a specific size soon)
+      const randoSize = Math.floor(Math.random() * 40 + 5)
+      const dice = Math.random() > 0.5 ? 1 : 0
+      console.log(dice)
+      // create the element itself
       const createEle = document.createElement('span')
       const createEmoji = document.createTextNode('😋')
+      createEle.style.fontSize = `${randoSize}px`
+      createEle.classList.add('emoji')
       createEle.appendChild(createEmoji)
       this.$refs.emojiSpace.appendChild(createEle)
 
+      // offset within the parent space
+      if (dice === 1) {
+        createEle.style.right = `${randoSize}px`
+        createEle.style.left = `${randoSize}px / 2`
+        createEle.style.top = `${randoSize}px * 1.5`
+      } else if (dice === 0) {
+        createEle.style.left = `${randoSize}px`
+        createEle.style.right = `${randoSize}px / 2`
+        createEle.style.top = `${randoSize}px`
+      }
+      const animation = createEle.animate(
+        [
+          {
+            opacity: 1,
+          },
+          {
+            transform: 'translate(0px,-300px)',
+            opacity: 0,
+            textSize: `${randoSize}px`,
+          },
+        ],
+        {
+          duration: 3000,
+          opacity: 0,
+          // Delay every particle with a random value from 0ms to 200ms
+          delay: Math.random() * 200,
+        }
+      )
+
+      animation.onfinish = () => {
+        createEle.remove()
+      }
+
       // Replace with the animation api's onfinish function when animations are done
       setTimeout(function () {
-        createEle.remove()
+        // createEle.remove()
       }, 3000)
     },
     onFocus(e) {
@@ -45,11 +86,18 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+// does the style need to be scoped? I can't target new elements for some
+reason...
+
+<style lang="scss">
 .container:focus {
   outline: 0.1rem dashed rgba(lightgray, 0.1);
 }
 .reaction-space {
   left: 200%;
+  * {
+    position: absolute;
+    opacity: 0;
+  }
 }
 </style>
