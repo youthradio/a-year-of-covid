@@ -1,19 +1,27 @@
 <template>
   <div class="">
     <div
-      class="f6 br4 pa2 bg-near-black light-silver mw5 shadow-2 container flex"
+      class="f6 br4 pa2 bg-near-black light-silver w-100 mw6 shadow-2 container"
       @focusout="onFocus"
     >
-      <span
-        v-for="(emoji, index) in content"
-        :key="index"
-        class="f5 db pointer ph1"
-        @click="test(emoji)"
-        >{{ emoji }}</span
-      >
+      <div class="f5 mw5 pv2">
+        How would you describe your first year of virtual learning?
+      </div>
+      <div class="flex justify-between w-100">
+        <span
+          v-for="(emoji, index) in content"
+          :key="index"
+          class="f2 db pointer ph1"
+          @click="test(emoji)"
+          >{{ emoji }}</span
+        >
+      </div>
     </div>
     <!-- Unfinished note, because tabs are defined in limited spaces, it's hard to make a space for the emojis that sit on a responive corner of the screen, so I'm more doing hacky positioning to simply getting it working for now -->
-    <div ref="emojiSpace" class="reaction-space absolute w-100"></div>
+    <div
+      ref="emojiSpace"
+      class="reaction-space absolute w-100 left-0 bottom-0"
+    ></div>
   </div>
 </template>
 
