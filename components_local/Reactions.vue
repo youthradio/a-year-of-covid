@@ -7,7 +7,7 @@
       <span
         v-for="(emoji, index) in content"
         :key="index"
-        class="f5 db"
+        class="f5 db pointer ph1"
         @click="test(emoji)"
         >{{ emoji }}</span
       >
