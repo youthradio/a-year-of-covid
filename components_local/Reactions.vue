@@ -49,6 +49,7 @@ export default {
         createEle.style.right = `${randoSize}px / 2`
         createEle.style.top = `${randoSize}px`
       }
+
       const animation = createEle.animate(
         [
           {
@@ -62,7 +63,7 @@ export default {
         ],
         {
           duration: 3000,
-          opacity: 0,
+          easing: 'cubic-bezier(0, .96, .46, 0.07)',
           // Delay every particle with a random value from 0ms to 200ms
           delay: Math.random() * 200,
         }
