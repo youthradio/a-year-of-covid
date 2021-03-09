@@ -50,7 +50,7 @@ export default {
         createEle.style.top = `${randoSize}px`
       }
 
-      const animation = createEle.animate(
+      const leadAnimation = createEle.animate(
         [
           {
             opacity: 1,
@@ -68,8 +68,27 @@ export default {
           delay: Math.random() * 200,
         }
       )
+      createEle.animate(
+        [
+          {
+            transform: [`translateX(-5px)`],
+          },
+          {
+            transform: [`translateX(5px)`],
+          },
+          {
+            transform: [`translateX(-5px)`],
+          },
+        ],
+        {
+          duration: 300 + Math.floor(Math.random() * 500),
+          composite: 'add',
+          iterations: Infinity,
+          easing: 'ease-in-out',
+        }
+      )
 
-      animation.onfinish = () => {
+      leadAnimation.onfinish = () => {
         createEle.remove()
       }
 
