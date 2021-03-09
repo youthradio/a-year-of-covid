@@ -9,10 +9,10 @@
         class="relative ph3 center min-vh-100 flex flex-column justify-center"
       >
         <article class="measure-wide relative center tc">
-          <h1 class="day-sans f1-ns f3 lh-title mt">
+          <h1 class="day-sans f1-ns f3 lh-1-1 mt">
             {{ articleData.headline }}
           </h1>
-          <h3 class="roboto-mono fw3 f3-ns f4 lh-title">
+          <h3 class="roboto-mono fw5 f3-ns f4 lh-title">
             {{ articleData.subheadline }}
           </h3>
           <h4 class="assistant normal">{{ articleData.date }}</h4>
@@ -38,14 +38,14 @@
         <div class="flex-auto flex">
           <div class="flex items-center justify-center items-center w-100">
             <div
-              v-show="UIState.chat ? innerWidth > 750 : true"
-              class="mw8 cente ph4 grid grid-auto-rows grid-container--fit"
+              v-show="UIState.chat ? innerWidth > 767 : true"
+              class="mw8 center ph4 grid grid-auto-rows grid-container--fit"
             >
               <template v-for="(participant, i) in participants">
                 <video-player
                   :key="participant.name"
                   :style="
-                    i > 5 && innerWidth > 550
+                    i > 5 && innerWidth > 767
                       ? {
                           gridColumn: i > 6 ? 3 : 2,
                           transform: 'translateX(-50%)',
@@ -149,7 +149,7 @@ export default {
   },
   watch: {
     innerWidth() {
-      this.setUIState({ chat: this.innerWidth > 750 })
+      this.setUIState({ chat: this.innerWidth > 767 })
     },
   },
 
@@ -159,7 +159,7 @@ export default {
     )
     setTimeout(() => window.scrollTo(0, 10), 1000)
     this.onWindowResize()
-    this.setUIState({ chat: this.innerWidth > 750 })
+    this.setUIState({ chat: this.innerWidth > 767 })
   },
   methods: {
     onWindowResize() {
@@ -217,7 +217,7 @@ button {
   min-height: calc(100vh - 68px);
 }
 .vh-menu {
-  height: calc(100vh - 68px);
+  min-height: calc(100vh - 68px);
 }
 .center-box {
   left: 50%;

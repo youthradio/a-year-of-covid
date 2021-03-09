@@ -1,10 +1,10 @@
 <template>
   <div
-    class="f6 br4 pa2 bg-near-black light-silver w-100 mw6 shadow-2 container"
+    class="f6 br4 pv2 ph3 bg-near-black light-silver w-100 mw6 shadow-2 container"
     tabindex="-1"
     @focusout="onFocus"
   >
-    <span class="fw5">Contributors</span>
+    <span class="fw7">Contributors</span>
     <ul class="list pa0">
       <li
         v-for="participant in content"
@@ -15,8 +15,8 @@
           <img class="br-100 bn h2 w2 dib" :src="participant.image" />
         </div>
         <div class="mh2">
-          <div class="fw5">{{ participant.name }}</div>
-          <div class="fw1">
+          <div class="fw7">{{ participant.name }}</div>
+          <div class="fw5">
             {{ participant.school }} ({{ participant.location }})
           </div>
         </div>

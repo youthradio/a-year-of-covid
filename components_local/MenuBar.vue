@@ -1,41 +1,35 @@
 <template>
-  <div class="flex bg-near-black light-silver pv1 justify-center">
-    <div class="ph2">
-      <button
-        class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
-        @click.prevent="toggleUIState('contributors')"
-      >
-        <peopleicon class="pv1 icon" />
-        <contributorstext class="text-size pv1" />
-      </button>
-    </div>
-    <div class="ph2">
-      <button
-        class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
-        @click.prevent="toggleUIState('chat')"
-      >
-        <chaticon class="pv1 icon" />
-        <chattext class="text-size pv1" />
-      </button>
-    </div>
-    <div class="ph2">
-      <button
-        class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
-        @click.prevent="toggleUIState('credits')"
-      >
-        <creditsicon class="pv1 icon" />
-        <creditstext class="text-size pv1" />
-      </button>
-    </div>
-    <div class="ph2">
-      <button
-        class="icon-hover pointer f6 bn grow ph2 pv2 mb2 dib light-silver bg-near-black"
-        @click.prevent="toggleUIState('more')"
-      >
-        <moreicon class="pv1 icon" />
-        <moretext class="text-size pv1" />
-      </button>
-    </div>
+  <div
+    class="flex bg-near-black light-silver pb2 justify-center align-baseline"
+  >
+    <button
+      class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
+      @click.prevent="toggleUIState('contributors')"
+    >
+      <peopleicon class="icon pv2" />
+      <contributorstext class="text-size" />
+    </button>
+    <button
+      class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
+      @click.prevent="toggleUIState('chat')"
+    >
+      <chaticon class="icon pv2" />
+      <chattext class="text-size" />
+    </button>
+    <button
+      class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
+      @click.prevent="toggleUIState('credits')"
+    >
+      <creditsicon class="icon pv2" />
+      <creditstext class="text-size self-baseline" />
+    </button>
+    <button
+      class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
+      @click.prevent="toggleUIState('more')"
+    >
+      <moreicon class="icon pv2" />
+      <moretext class="text-size self-baseline" />
+    </button>
   </div>
 </template>
 
