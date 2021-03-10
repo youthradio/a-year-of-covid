@@ -34,7 +34,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - name: Rebuild for Production
         env:
-          BASE_URL_PRODUCTION: zoomiversary-school-on-screens
+          BASE_URL_PRODUCTION: /zoomiversary-school-on-screens
         run: yarn publish-ghpages
 
       - name: Deploy Production
@@ -55,5 +55,5 @@ jobs:
           key: ${{ secrets.key }}
           port: ${{ secrets.PORT }}
           script: |
-            cd static/opinion-soundtrack-for-trump-free-white-house 
+            cd static/zoomiversary-school-on-screens
             git fetch && git reset --hard FETCH_HEAD && git clean -df

@@ -1,9 +1,6 @@
 import { content as ArticleData } from './data/data.json'
 
-const BASEURL =
-  process.env.BASE_URL_PRODUCTION === ''
-    ? process.env.BASE_URL_PRODUCTION
-    : '/a-year-of-covid'
+const BASEURL = process.env.BASE_URL_PRODUCTION || '/a-year-of-covid'
 const CAN_URL =
   process.env.BASE_URL_PRODUCTION === ''
     ? `https://interactive.yr.media`
