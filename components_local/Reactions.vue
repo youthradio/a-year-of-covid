@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div
-      class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver w-100 mw6 shadow-2 container"
+      class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver mw6 shadow-2 container"
       @focusout="onFocus"
     >
       <div class="f5 mw5 pv2">
@@ -42,7 +42,7 @@ export default {
       // console.log(this.$refs.emojiSpace)
 
       // generate a random size for randomized properties (clamp a fixed bottom size soon)
-      const randoSize = Math.floor(Math.random() * 40 + 5)
+      const randoSize = Math.floor(Math.random() * 90 + 5)
       const dice = Math.random() > 0.5 ? 1 : 0
       // console.log(dice)
       // create the element itself
@@ -71,7 +71,7 @@ export default {
             opacity: 1,
           },
           {
-            transform: 'translate(0px,-300px)',
+            transform: 'translate(0px,-100vh)',
             opacity: 0,
             textSize: `${randoSize}px`,
             // maybe its worth linking opacity to its own animation so it wouldnt apply to the easing
@@ -126,7 +126,6 @@ when scoped...
   outline: 0.1rem dashed rgba(lightgray, 0.1);
 }
 .reaction-space {
-  left: 200%;
   .emoji {
     position: absolute;
     opacity: 0;
