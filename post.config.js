@@ -19,7 +19,7 @@ const POSTCONFIG = {
   description: ArticleData.seo_description || '',
   tweetMessage: '@itsyrmedia',
   url: CAN_URL,
-  featureImage: `${CAN_URL}/yriHEADWERrectangle_social.jpg`,
+  featureImage: `${CAN_URL}/social.jpg`,
 
   featureImagePath: 'images/template-feature-image',
   featureImageDescription: 'People Protesting BLM',
