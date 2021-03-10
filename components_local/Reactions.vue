@@ -1,10 +1,10 @@
 <template>
   <div class="relative">
     <div
-      class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver mw6 shadow-2 container"
+      class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver mw6 shadow-2 container z-0"
       @focusout="onFocus"
     >
-      <div class="f5 mw5 pv2">
+      <div class="f5 mw5 pv2 mb3 bb b--white-50">
         How would you describe your first year of virtual learning?
       </div>
       <div class="flex justify-between w-100">
@@ -20,7 +20,7 @@
     <!-- Unfinished note, because tabs are defined in limited spaces, it's hard to make a space for the emojis that sit on a responive corner of the screen, so I'm more doing hacky positioning to simply getting it working for now -->
     <div
       ref="emojiSpace"
-      class="reaction-space absolute w-100 left-0 bottom-0"
+      class="reaction-space z-0 absolute w-100 left-0 bottom-0"
     ></div>
   </div>
 </template>
@@ -130,6 +130,7 @@ when scoped...
     position: absolute;
     opacity: 0;
     pointer-events: none;
+    z-index: 100000;
   }
 }
 </style>

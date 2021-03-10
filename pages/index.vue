@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-column assistant relative ios-bar-fix">
-    <MenuHeader class="z-10" />
+    <MenuHeader />
     <!-- Slider div container -->
-    <div ref="container" class="h-100 w-100">
+    <div ref="container" class="h-100 w-100 z-">
       <!-- Additional required wrapper -->
       <!-- Slides -->
       <header
