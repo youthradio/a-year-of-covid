@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div
-      class="f6 br4 pa2 bg-near-black light-silver w-100 mw6 shadow-2 container"
+      class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver w-100 mw6 shadow-2 container"
       @focusout="onFocus"
     >
       <div class="f5 mw5 pv2">
@@ -11,7 +11,7 @@
         <span
           v-for="(emoji, index) in content"
           :key="index"
-          class="f2 db pointer ph1"
+          class="f3 dib pointer ph1 grow-large"
           @click="test(emoji)"
           >{{ emoji }}</span
         >

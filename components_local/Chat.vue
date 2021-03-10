@@ -9,7 +9,7 @@
             <span class="blue">{{ chat.to }}</span>
           </div>
           <div
-            class="br4 pa3 bg-lightest-blue reset-p"
+            class="br4 mt1 pa3 bg-lightest-blue reset-p"
             v-html="chat.text"
           ></div>
         </div>

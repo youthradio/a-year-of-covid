@@ -75,7 +75,7 @@
           />
           <reactions
             v-show="UIState.reactions"
-            :content="['👏', '👍', '❤️', '😂', '🎉']"
+            :content="['🥲', '😒', '💀', '🤡', '👎']"
             class="absolute z-2 center-box"
           />
           <credits

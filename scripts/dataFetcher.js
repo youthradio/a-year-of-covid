@@ -50,6 +50,13 @@ function markdown2html(data) {
           ALLOWED_TAGS: ['a'],
           KEEP_CONTENT: true,
         }
+        if (key === 'label') {
+          configDom = {
+            ADD_ATTR: ['target'],
+            ALLOWED_TAGS: ['a', 'b', 'br', 'div', 'style', 'strong', 'i'],
+            KEEP_CONTENT: true,
+          }
+        }
         if (key === 'text') {
           configDom = {
             ADD_ATTR: ['target'],

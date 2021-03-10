@@ -1,6 +1,6 @@
 <template>
   <div
-    class="f6 br4 pv2 ph3 bg-near-black light-silver w-100 mw6 shadow-2 container"
+    class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver w-100 mw6 shadow-2 container"
     tabindex="-1"
     @focusout="onFocus"
   >
@@ -12,13 +12,16 @@
         class="pa0 mh0 mv2 flex"
       >
         <div class="grow-large">
-          <img class="br-100 bn h2 w2 dib" :src="participant.image" />
+          <img class="br-100 bn h2 w2 dib dn" :src="participant.image" />
         </div>
-        <div class="mh2">
+        <div class="ml1">
           <div class="fw7">{{ participant.name }}</div>
-          <div class="fw5">
-            {{ participant.school }} ({{ participant.location }})
-          </div>
+          <div
+            class="fw5"
+            v-html="
+              `${participant.school.label.trim()} <br class='dib dn-ns'> (${participant.location.trim()})`
+            "
+          />
         </div>
       </li>
     </ul>
