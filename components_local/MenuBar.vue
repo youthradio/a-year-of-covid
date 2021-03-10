@@ -18,6 +18,13 @@
     </button>
     <button
       class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
+      @click.prevent="toggleUIState('reactions')"
+    >
+      <creditsicon class="icon pv2" />
+      <reactionstext class="text-size self-baseline" />
+    </button>
+    <button
+      class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
       @click.prevent="toggleUIState('credits')"
     >
       <creditsicon class="icon pv2" />
