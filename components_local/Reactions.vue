@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="relative">
     <div
       class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver w-100 mw6 shadow-2 container"
       @focusout="onFocus"
