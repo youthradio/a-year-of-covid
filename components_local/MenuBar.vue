@@ -14,7 +14,7 @@
       @click.prevent="toggleUIState('chat')"
     >
       <chaticon class="icon pv2" />
-      <chattext class="text-size" />
+      <introtext class="text-size" />
     </button>
     <button
       class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
