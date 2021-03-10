@@ -1,14 +1,40 @@
 <template>
   <div
-    class="center"
-    @pointerdown.prevent="restartUnmute()"
-    @mouseover="restartUnmute()"
-    @mouseleave="
+    tabindex="0"
+    class="center container"
+    :style="
+      !isClicked && index > 5
+        ? { gridColumn: index > 6 ? 3 : 2, transform: 'translateX(-50%)' }
+        : {}
+    "
+    @pointerdown.prevent="
+      if (!isClicked) {
+        $el.focus()
+        setUIState({ chat: false })
+        isClicked = true
+        restartUnmute()
+      }
+    "
+    @focusout="
+      isClicked = false
       mute(true)
       play()
     "
+    @mouseover="
+      if (!isClicked) {
+        $el.focus()
+        restartUnmute()
+      }
+    "
+    @mouseleave="
+      if (!isClicked) {
+        mute(true)
+        play()
+      }
+    "
   >
-    <div class="relative w-100 h-100 pa2">
+    <div v-if="isClicked" class="fixed h-100 w-100 top-0 left-0 blur-bg"></div>
+    <div :class="[isClicked ? 'full-video' : '', 'relative w-100 h-100 pa2']">
       <div class="absolute w-100 h-100 flex justify-center items-center">
         <img class="grow-large br-100 bn h2 w2 dib" :src="participant.image" />
       </div>
@@ -45,6 +71,12 @@ export default {
     participant: { type: Object, required: true },
     videoFolder: { type: String, required: true },
     isUnmuted: { type: Boolean, require: true },
+    index: { type: Number, required: true },
+  },
+  data() {
+    return {
+      isClicked: false,
+    }
   },
   watch: {
     isUnmuted() {
@@ -79,8 +111,15 @@ export default {
     mute(state) {
       this.$refs.video.muted = state
     },
+    setUIState(state) {
+      this.$store.dispatch('setUIState', state)
+    },
   },
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.container:focus {
+  outline: 0 dashed rgba(lightgray, 0.1);
+}
+</style>

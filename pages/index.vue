@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-column assistant relative ios-bar-fix">
-    <MenuHeader />
+    <MenuHeader tabindex="0" />
     <!-- Slider div container -->
     <div ref="container" class="h-100 w-100 z-">
       <!-- Additional required wrapper -->
@@ -39,19 +39,12 @@
           <div class="flex items-center justify-center items-center w-100">
             <div
               v-show="UIState.chat ? innerWidth > 767 : true"
-              class="mw8 center ph4 grid grid-auto-rows grid-container--fit"
+              class="mw8 center ph4 grid grid-auto-rows grid-container--fit relative"
             >
               <template v-for="(participant, i) in participants">
                 <video-player
                   :key="participant.name"
-                  :style="
-                    i > 5 && innerWidth > 767
-                      ? {
-                          gridColumn: i > 6 ? 3 : 2,
-                          transform: 'translateX(-50%)',
-                        }
-                      : {}
-                  "
+                  :index="innerWidth > 767 ? i : -1"
                   :video-folder="articleData.video_folder"
                   :participant="participant"
                   :is-unmuted="unmutedId === participant.id"
