@@ -34,7 +34,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - name: Rebuild for Production
         env:
-          BASE_URL_PRODUCTION: a-year-of-covid-school-on-screens
+          BASE_URL_PRODUCTION: zoomiversary-school-on-screens
         run: yarn publish-ghpages
 
       - name: Deploy Production
