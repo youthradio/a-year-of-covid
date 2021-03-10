@@ -1,4 +1,5 @@
-import { content as ArticleData } from './data/data.json'
+import ArticleData from './data/data.json'
+const content = ArticleData.content[0]
 
 const BASEURL = process.env.BASE_URL_PRODUCTION || '/a-year-of-covid'
 const CAN_URL =
@@ -8,11 +9,11 @@ const CAN_URL =
 
 const POSTCONFIG = {
   baseURL: BASEURL,
-  title: ArticleData[0].headline,
-  author: ArticleData[0].author,
-  publishDate: ArticleData[0].date,
-  location: ArticleData[0].location,
-  description: ArticleData[0].seo_description || '',
+  title: content.headline,
+  author: content.author,
+  publishDate: content.date,
+  location: content.location,
+  description: content.seo_description || '',
   tweetMessage: '@itsyrmedia',
   url: CAN_URL,
   featureImage: `${CAN_URL}/social.jpg`,
