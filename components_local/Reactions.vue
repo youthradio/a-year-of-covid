@@ -38,13 +38,13 @@ export default {
   },
   methods: {
     test(emoji) {
-      console.log('Recieved a click, emoji is ' + emoji)
-      console.log(this.$refs.emojiSpace)
+      // console.log('Recieved a click, emoji is ' + emoji)
+      // console.log(this.$refs.emojiSpace)
 
       // generate a random size for randomized properties (clamp a fixed bottom size soon)
       const randoSize = Math.floor(Math.random() * 40 + 5)
       const dice = Math.random() > 0.5 ? 1 : 0
-      console.log(dice)
+      // console.log(dice)
       // create the element itself
       const createEle = document.createElement('span')
       const createEmoji = document.createTextNode(emoji)
