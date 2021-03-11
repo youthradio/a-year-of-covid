@@ -12,13 +12,10 @@
         $el.focus()
         setUIState({ chat: false })
         isClicked = true
-        restartUnmute()
+        if (!isUnmuted) {
+          restartUnmute()
+        }
       }
-    "
-    @focusout="
-      isClicked = false
-      mute(true)
-      play()
     "
     @mouseover="
       if (!isClicked) {
@@ -126,6 +123,11 @@ export default {
     },
     setUIState(state) {
       this.$store.dispatch('setUIState', state)
+    },
+    onClickOut() {
+      this.isClicked = false
+      this.mute(true)
+      this.play()
     },
   },
 }

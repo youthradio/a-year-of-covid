@@ -1,8 +1,8 @@
 <template>
   <div
+    v-click-outside="onClickOut"
     tabindex="-1"
     class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver mw6 shadow-2 container z-0 relative"
-    @focusout="onFocus"
   >
     <div class="f5 mw5 pv2 mb3 bb b--white-50">
       How would you describe your first year of virtual learning?
@@ -108,10 +108,8 @@ export default {
         createEle.remove()
       }
     },
-    onFocus(e) {
-      if (e.type === 'focusout') {
-        this.$store.dispatch('setUIState', { reactions: false })
-      }
+    onClickOut(e) {
+      this.$store.dispatch('setUIState', { reactions: false })
     },
   },
 }

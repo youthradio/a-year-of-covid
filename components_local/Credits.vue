@@ -1,8 +1,8 @@
 <template>
   <div
+    v-click-outside="onClickOut"
     class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver w-100 mw6 shadow-2 container"
     tabindex="-1"
-    @focusout="onFocus"
   >
     <h4 class="fw7 b lh-title mv1">Credits</h4>
 
@@ -27,10 +27,8 @@ export default {
     this.$el.focus()
   },
   methods: {
-    onFocus(e) {
-      if (e.type === 'focusout') {
-        this.$store.dispatch('setUIState', { credits: false })
-      }
+    onClickOut(e) {
+      this.$store.dispatch('setUIState', { credits: false })
     },
   },
 }

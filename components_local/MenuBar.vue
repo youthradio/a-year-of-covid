@@ -4,35 +4,35 @@
   >
     <button
       class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
-      @click.prevent="toggleUIState('contributors')"
+      @click.stop="toggleUIState('contributors')"
     >
       <peopleicon class="icon pv2" />
       <contributorstext class="text-size" />
     </button>
     <button
       class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
-      @click.prevent="toggleUIState('chat')"
+      @click.stop="toggleUIState('chat')"
     >
       <chaticon class="icon pv2" />
       <introtext class="text-size" />
     </button>
     <button
       class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
-      @click.prevent="toggleUIState('reactions')"
+      @click.stop="toggleUIState('reactions')"
     >
       <reactionicon class="icon pv2" />
       <reactionstext class="text-size self-baseline" />
     </button>
     <button
       class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
-      @click.prevent="toggleUIState('credits')"
+      @click.stop="toggleUIState('credits')"
     >
       <creditsicon class="icon pv2" />
       <creditstext class="text-size self-baseline" />
     </button>
     <button
       class="icon-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
-      @click.prevent="toggleUIState('more')"
+      @click.stop="toggleUIState('more')"
     >
       <moreicon class="icon pv2" />
       <moretext class="text-size self-baseline" />

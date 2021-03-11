@@ -1,8 +1,8 @@
 <template>
   <div
+    v-click-outside="onClickOut"
     class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver w-100 mw6 shadow-2 container"
     tabindex="-1"
-    @focusout="onFocus"
   >
     <h4 class="fw7 b lh-title mv2">{{ content.title }}</h4>
     <ul class="list pa0 lh-copy mt0">
@@ -10,6 +10,8 @@
         <a
           class="light-silver hover-green link db fw5 no-underline underline-hover"
           :href="link.link"
+          target="_blank"
+          rel="noopener noreferrer"
           >{{ link.title }}</a
         >
       </li>
@@ -29,10 +31,8 @@ export default {
     this.$el.focus()
   },
   methods: {
-    onFocus(e) {
-      if (e.type === 'focusout') {
-        this.$store.dispatch('setUIState', { more: false })
-      }
+    onClickOut(e) {
+      this.$store.dispatch('setUIState', { more: false })
     },
   },
 }
