@@ -134,6 +134,7 @@ export default {
     return {
       innerWidth: 0,
       unmutedId: null,
+      audioCtx: null,
     }
   },
   computed: {
@@ -148,6 +149,8 @@ export default {
   },
 
   mounted() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext
+    this.audioCtx = new AudioContext()
     window.addEventListener('resize', (event) =>
       this.debouceEvent(event, this.onWindowResize)
     )
@@ -173,13 +176,12 @@ export default {
       this.$store.dispatch('setUIState', state)
     },
     startAudio() {
-      const AudioContext = window.AudioContext || window.webkitAudioContext
-      const audioCtx = new AudioContext()
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume()
+      if (this.audioCtx.state === 'suspended') {
+        this.audioCtx.resume()
       }
     },
     onUnmuted({ id }) {
+      this.startAudio()
       this.unmutedId = id
     },
   },
