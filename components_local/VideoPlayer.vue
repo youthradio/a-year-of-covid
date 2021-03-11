@@ -1,7 +1,7 @@
 <template>
   <div
     tabindex="0"
-    class="center container"
+    class="container pointer"
     :style="
       !isClicked && index > 5
         ? { gridColumn: index > 6 ? 3 : 2, transform: 'translateX(-50%)' }
@@ -33,8 +33,21 @@
       }
     "
   >
-    <div v-if="isClicked" class="fixed h-100 w-100 top-0 left-0 blur-bg"></div>
-    <div :class="[isClicked ? 'full-video' : '', 'relative w-100 h-100 pa2']">
+    <div
+      v-if="isClicked"
+      class="fixed h-100 w-100 top-0 left-0 blur-bg"
+      @click="
+        isClicked = false
+        mute(true)
+        play()
+      "
+    ></div>
+    <div
+      :class="[
+        isClicked ? 'full-video' : ' w-100 h-100',
+        'relative w-100 h-100 pa2',
+      ]"
+    >
       <div class="absolute w-100 h-100 flex justify-center items-center">
         <img class="grow-large br-100 bn h2 w2 dib" :src="participant.image" />
       </div>
