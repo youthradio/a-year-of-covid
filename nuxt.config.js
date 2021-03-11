@@ -104,6 +104,10 @@ export default {
    */
   plugins: [
     {
+      src: '~plugins/click-outside.js',
+      mode: 'client',
+    },
+    {
       src: '~plugins/scroll-smooth.js',
       mode: 'client',
     },
