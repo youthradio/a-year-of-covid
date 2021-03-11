@@ -3,9 +3,9 @@ const content = ArticleData.content[0]
 
 const BASEURL = process.env.BASE_URL_PRODUCTION || '/a-year-of-covid'
 const CAN_URL =
-  process.env.BASE_URL_PRODUCTION === ''
-    ? `https://interactive.yr.media`
-    : `https://youthradio.github.io${BASEURL}`
+  process.env.BASE_URL_PRODUCTION === null
+    ? `https://youthradio.github.io${BASEURL}`
+    : `https://interactive.yr.media${BASEURL}`
 
 const POSTCONFIG = {
   baseURL: BASEURL,
