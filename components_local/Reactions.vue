@@ -1,28 +1,27 @@
 <template>
-  <div class="relative">
-    <div
-      class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver mw6 shadow-2 container z-0"
-      @focusout="onFocus"
-    >
-      <div class="f5 mw5 pv2 mb3 bb b--white-50">
-        How would you describe your first year of virtual learning?
-      </div>
-      <div class="flex justify-between w-100">
-        <span
-          v-for="(emoji, index) in content"
-          :key="index"
-          class="f3 dib pointer ph1 grow-large"
-          @click="test(emoji)"
-          >{{ emoji }}</span
-        >
-      </div>
+  <div
+    tabindex="-1"
+    class="f6 br4 pt3 pb2 ph3 bg-near-black light-silver mw6 shadow-2 container z-0 relative"
+    @focusout="onFocus"
+  >
+    <div class="f5 mw5 pv2 mb3 bb b--white-50">
+      How would you describe your first year of virtual learning?
     </div>
-    <!-- Unfinished note, because tabs are defined in limited spaces, it's hard to make a space for the emojis that sit on a responive corner of the screen, so I'm more doing hacky positioning to simply getting it working for now -->
+    <div class="flex justify-between w-100">
+      <span
+        v-for="(emoji, index) in content"
+        :key="index"
+        class="f3 dib pointer ph1 grow-large"
+        @click="test(emoji)"
+        >{{ emoji }}</span
+      >
+    </div>
     <div
       ref="emojiSpace"
       class="reaction-space z-0 absolute w-100 left-0 bottom-0"
     ></div>
   </div>
+  <!-- Unfinished note, because tabs are defined in limited spaces, it's hard to make a space for the emojis that sit on a responive corner of the screen, so I'm more doing hacky positioning to simply getting it working for now -->
 </template>
 
 <script>
@@ -111,7 +110,7 @@ export default {
     },
     onFocus(e) {
       if (e.type === 'focusout') {
-        this.$store.dispatch('toggleUIState', 'reactions')
+        this.$store.dispatch('setUIState', { reactions: false })
       }
     },
   },

@@ -62,22 +62,22 @@
         </div>
         <div class="relative">
           <contributors
-            v-show="UIState.contributors"
+            v-if="UIState.contributors"
             class="absolute z-2 center-box"
             :content="participants"
           />
           <reactions
-            v-show="UIState.reactions"
+            v-if="UIState.reactions"
             :content="['🥲', '😒', '💀', '🤡', '👎']"
             class="absolute z-2 center-box"
           />
           <credits
-            v-show="UIState.credits"
+            v-if="UIState.credits"
             class="absolute z-2 center-box"
             :content="articleData.credits"
           />
           <more
-            v-show="UIState.more"
+            v-if="UIState.more"
             class="absolute z-2 center-box"
             :content="articleData.more"
           />

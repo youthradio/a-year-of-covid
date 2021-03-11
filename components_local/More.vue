@@ -31,7 +31,7 @@ export default {
   methods: {
     onFocus(e) {
       if (e.type === 'focusout') {
-        this.$store.dispatch('toggleUIState', 'credits')
+        this.$store.dispatch('setUIState', { more: false })
       }
     },
   },
