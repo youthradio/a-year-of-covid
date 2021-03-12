@@ -29,6 +29,14 @@
           <p class="gray">
             {{ articleData.disclaimer }}
           </p>
+
+          <div class="mt3">
+            <social-share
+              :description="articleData.seo_description"
+              :tweet-message="articleData.seo_description"
+              :title="articleData.headline"
+            />
+          </div>
         </article>
       </header>
       <div
@@ -82,7 +90,11 @@
             :content="articleData.more"
           />
           <div class="bg-near-black w-100">
-            <menu-bar />
+            <menu-bar
+              :description="articleData.seo_description"
+              :tweet-message="articleData.seo_description"
+              :title="articleData.headline"
+            />
           </div>
         </div>
       </div>
@@ -95,7 +107,7 @@ import { nanoid } from 'nanoid'
 import CommonUtils from '../mixins/CommonUtils'
 import POSTCONFIG from '~/post.config'
 import MenuHeader from '~/components/Header/MenuHeader'
-// import ShareContainer from '~/components/Custom/ShareContainer'
+import SocialShare from '~/components_local/SocialShare'
 import ArticleData from '~/data/data.json'
 import VideoPlayer from '~/components_local/VideoPlayer.vue'
 import Chat from '~/components_local/Chat.vue'
@@ -116,6 +128,7 @@ export default {
     MenuBar,
     Reactions,
     More,
+    SocialShare,
   },
   mixins: [CommonUtils],
 
