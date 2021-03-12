@@ -167,7 +167,6 @@ export default {
     window.addEventListener('resize', (event) =>
       this.debouceEvent(event, this.onWindowResize)
     )
-    setTimeout(() => window.scrollTo(0, 10), 1000)
     this.onWindowResize()
     this.setUIState({ chat: this.innerWidth > 767 })
   },
