@@ -1,6 +1,6 @@
 <template>
   <div class="ph3 lh-solid">
-    <h3 class="tc">Chat</h3>
+    <h3 class="tc">Intro</h3>
     <div>
       <template v-for="(chat, i) in content">
         <div :key="`chat.text-${i}`" class="mt3">

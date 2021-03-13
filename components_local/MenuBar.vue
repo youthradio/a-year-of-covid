@@ -10,17 +10,17 @@
     <div class="flex mr-auto-ns">
       <button
         class="icon-menu-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
-        @click.stop="toggleUIState('contributors')"
-      >
-        <peopleicon class="icon pv2" />
-        <contributorstext class="text-size" />
-      </button>
-      <button
-        class="icon-menu-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
         @click.stop="toggleUIState('chat')"
       >
         <chaticon class="icon pv2" />
         <introtext class="text-size" />
+      </button>
+      <button
+        class="icon-menu-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
+        @click.stop="toggleUIState('contributors')"
+      >
+        <peopleicon class="icon pv2" />
+        <contributorstext class="text-size" />
       </button>
       <button
         class="icon-menu-hover pointer f6 bn grow light-silver bg-near-black ph2 flex flex-column justify-between"
