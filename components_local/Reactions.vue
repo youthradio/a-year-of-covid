@@ -9,10 +9,13 @@
     </div>
     <div class="flex justify-between w-100">
       <span
-        v-for="(emoji, index) in content"
-        :key="index"
+        v-for="{ emoji, id } in content"
+        :key="id"
         class="f3 dib pointer ph1 grow-large"
-        @click="test(emoji)"
+        @click="
+          test(emoji)
+          likeEmoji(emoji, id)
+        "
         >{{ emoji }}</span
       >
     </div>
@@ -25,6 +28,7 @@
 </template>
 
 <script>
+import POSTCONFIG from '~/post.config'
 export default {
   props: {
     content: {
@@ -36,6 +40,35 @@ export default {
     this.$el.focus()
   },
   methods: {
+    async likeEmoji(emoji, id) {
+      if (this.hasLiked) return
+      this.hasLiked = true
+      this.likesLoading = true
+      const res = await fetch(
+        `${POSTCONFIG.POLLSERVER}/vote_poll/${POSTCONFIG.POLLID}/${id}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      ).then((res) => res.json())
+      const total = res.poll.options.reduce((acc, i) => i.count + acc, 0)
+
+      const emojis = this.content.map(({ emoji, id }) => {
+        const likes = res.poll.options.find((e) => e.id === id)
+
+        return `${emoji} ${this.generateState(likes.count / total)}`
+      })
+
+      // eslint-disable-next-line no-console
+      console.log(emojis.join('\n'))
+    },
+    generateState(val) {
+      const CHAR = '▓'
+      const stat = Array(~~(15 * val))
+        .fill(CHAR)
+        .join('')
+      return `${stat} ${(100 * val).toFixed()}%`
+    },
     test(emoji) {
       // console.log('Recieved a click, emoji is ' + emoji)
       // console.log(this.$refs.emojiSpace)

@@ -35,7 +35,7 @@ const POSTCONFIG = {
   ],
   dataPath: '../data/data.json',
   POLLSERVER: 'https://ee51aej7u4.execute-api.us-west-2.amazonaws.com/latest',
-  POLLID: 'af897078-393e-4d86-bcab-ab079abfda21',
+  POLLID: '6ac25af7-19bf-4888-a068-9be292bd37fa',
 }
 
 export default POSTCONFIG

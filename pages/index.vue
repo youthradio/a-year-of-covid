@@ -76,7 +76,7 @@
           />
           <reactions
             v-if="UIState.reactions"
-            :content="['🙃', '😒', '💀', '🤡', '👎']"
+            :content="articleData.emojis"
             class="absolute z-2 center-box"
           />
           <credits
